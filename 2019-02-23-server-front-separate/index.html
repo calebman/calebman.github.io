@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+  
+
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="SpringBoot,vuejs,Nginx,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Sincerity" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon-32x32.png?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="SpringBoot+Vuejs+Nginx从开发至部署构建一个成熟的前后端分离应用">
+<meta name="keywords" content="SpringBoot,vuejs,Nginx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前后端分离开发模式的实践总结">
+<meta property="og:url" content="https://chenjianhui.site/2019-02-23-server-front-separate/index.html">
+<meta property="og:site_name" content="Sincerity">
+<meta property="og:description" content="SpringBoot+Vuejs+Nginx从开发至部署构建一个成熟的前后端分离应用">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-02-23-home-pic.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-02-23-root-folder.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-02-23-dist-folder.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-02-23-front-build-config.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-02-23-front-proxy-config.png">
+<meta property="og:updated_time" content="2019-04-08T02:31:45.865Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前后端分离开发模式的实践总结">
+<meta name="twitter:description" content="SpringBoot+Vuejs+Nginx从开发至部署构建一个成熟的前后端分离应用">
+<meta name="twitter:image" content="https://resources.chenjianhui.site/2019-02-23-home-pic.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chenjianhui.site/2019-02-23-server-front-separate/">
+
+
+
+
+
+  <title>前后端分离开发模式的实践总结 | Sincerity</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sincerity</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Story in work and life</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chenjianhui.site/2019-02-23-server-front-separate/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jianhui Chen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sincerity">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前后端分离开发模式的实践总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-23T11:03:25+08:00">
+                2019-02-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">•</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-th"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前后端分离/" itemprop="url" rel="index">
+                    <span itemprop="name">前后端分离</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">•</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-pencil-square"></i>
+                </span>
+                
+                <span title="字数统计">
+                  2.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">•</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">
+                  <center>SpringBoot+Vuejs+Nginx从开发至部署构建一个成熟的前后端分离应用</center>
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://resources.chenjianhui.site/2019-02-23-home-pic.png" alt><br><a id="more"></a></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&emsp;&emsp; 实践前后端分离的开发模式已经有两年左右的时间了，对于前后端分离开发模式的概念在这里不做过多解释，本文主要是总结开发模式并构建一个较为成熟的前后端分离应用</p>
+<h1 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h1><p>&emsp;&emsp; 关于技术选型方面线下国内比较流行的主要是SpringBoot+Vuejs这个技术栈，所以本文将基于这个技术栈来讲解，涉及到的技术主要有</p>
+<ul>
+<li>环境<ul>
+<li>Java</li>
+<li>Maven</li>
+<li>Nodejs</li>
+<li>Nginx</li>
+</ul>
+</li>
+<li>前端<ul>
+<li>vue-cli</li>
+</ul>
+</li>
+<li>后端<ul>
+<li>SpringBoot</li>
+</ul>
+</li>
+</ul>
+<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><p>&emsp;&emsp; 这里简要引用Windows下的环境搭建，关于Linux(Centos7)的环境搭建会再部署架构中讲到</p>
+<ul>
+<li>Java : <a href="https://www.cnblogs.com/smyhvae/p/3788534.html" target="_blank" rel="noopener">JDK开发环境搭建及环境变量配置</a></li>
+<li>Maven :<a href="https://www.cnblogs.com/youqc/archive/2017/10/15/7673913.html" target="_blank" rel="noopener">Maven开发环境搭建</a></li>
+<li>Nodejs :<a href="https://www.cnblogs.com/mq0036/p/5243209.html" target="_blank" rel="noopener">NodeJS、NPM安装配置与测试步骤(windows版本)</a></li>
+<li>Nginx :<a href="https://www.cnblogs.com/jiangwangxiang/p/8481661.html" target="_blank" rel="noopener">windows下nginx的安装及使用</a></li>
+</ul>
+<h1 id="构建前后端分离工程"><a href="#构建前后端分离工程" class="headerlink" title="构建前后端分离工程"></a>构建前后端分离工程</h1><h2 id="目录规划"><a href="#目录规划" class="headerlink" title="目录规划"></a>目录规划</h2><p>&emsp;&emsp;整体目录主要分为三块，如下所示</p>
+<p><img src="https://resources.chenjianhui.site/2019-02-23-root-folder.png" alt="整体目录结构"></p>
+<p>&emsp;&emsp;打包后的目录主要分为三块，如下所示<br><img src="https://resources.chenjianhui.site/2019-02-23-dist-folder.png" alt="项目打包目录"></p>
+<h2 id="后端工程"><a href="#后端工程" class="headerlink" title="后端工程"></a>后端工程</h2><p>&emsp;&emsp;后端工程主要基于SpringBoot脚手架搭建，SpringBoot基础的集成环境搭建可以参考我的另一篇博客<a href="/2018-02-21-build-springboot-env/">SpringBoot集成环境搭建</a></p>
+<p>&emsp;&emsp;首先创建一个只有Web功能的SpringBoot项目，修改其maven打包的配置实现以下两个功能</p>
+<ul>
+<li>将打包的jar文件移动至dist目录下</li>
+<li>将多环境配置文件从jar内部移动至外部的dist/config目录下</li>
+</ul>
+<p>&emsp;&emsp;此项修改主要依赖于以下两个maven插件</p>
+<ul>
+<li><a href="http://maven.apache.org/plugins/maven-resources-plugin" target="_blank" rel="noopener">maven-resources-plugin</a></li>
+<li><a href="http://maven.apache.org/plugins/maven-antrun-plugin" target="_blank" rel="noopener">maven-antrun-plugin</a></li>
+</ul>
+<p>&emsp;&emsp;详细的插件配置如下，在server/pom.xml的plugins标签下添加如下代码<br><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--复制配置文件--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-resources-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">id</span>&gt;</span>copy-resources<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">phase</span>&gt;</span>validate<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">goal</span>&gt;</span>copy-resources<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">outputDirectory</span>&gt;</span>$&#123;project.basedir&#125;/../dist/config<span class="tag">&lt;/<span class="name">outputDirectory</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">overwrite</span>&gt;</span>true<span class="tag">&lt;/<span class="name">overwrite</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/resources<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--移动并重命名jar包--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-antrun-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">phase</span>&gt;</span>package<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">goal</span>&gt;</span>run<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">target</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">move</span> <span class="attr">file</span>=<span class="string">"$&#123;project.basedir&#125;/target/$&#123;project.artifactId&#125;-$&#123;project.version&#125;.$&#123;project.packaging&#125;"</span> <span class="attr">tofile</span>=<span class="string">"$&#123;project.basedir&#125;/../dist/$&#123;project.artifactId&#125;-$&#123;project.version&#125;.$&#123;project.packaging&#125;"</span> /&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;进入到server/pom.xml同级目录，执行mvn clean package指令，打包成功会在dist目录下生成编译后的jar文件，dist/config目录下生成项目的配置文件</p>
+<h2 id="前端工程"><a href="#前端工程" class="headerlink" title="前端工程"></a>前端工程</h2><p>&emsp;&emsp;前端工程主要基于vue-cli脚手架创建，vue项目的环境搭建可以参照<a href="http://www.cnblogs.com/superlizhao/p/8664326.html" target="_blank" rel="noopener">vue-用Vue-cli从零开始搭建一个Vue项目</a><br>&emsp;&emsp;现在创建一个基础的vue项目，修改config/index.js配置以实现打包的静态资源生成至dist/html目录</p>
+<p><img src="https://resources.chenjianhui.site/2019-02-23-front-build-config.png" alt="前端打包配置修改"></p>
+<p>&emsp;&emsp;进入到front/package.json同级目录，执行npm run build指令，打包成功会在dist/html目录生成静态文件</p>
+<h2 id="集成测试"><a href="#集成测试" class="headerlink" title="集成测试"></a>集成测试</h2><h3 id="来个接口"><a href="#来个接口" class="headerlink" title="来个接口"></a>来个接口</h3><p>&emsp;&emsp;编写一个获取用户信息的接口<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServerApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(ServerApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取当前登录用户的个人信息</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 当前登录用户的个人信息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/user/me"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String, Object&gt; <span class="title">me</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Map&lt;String, Object&gt; result = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        result.put(<span class="string">"username"</span>, <span class="string">"admin"</span>);</span><br><span class="line">        result.put(<span class="string">"roles"</span>, Arrays.asList(<span class="string">"admin"</span>, <span class="string">"normal"</span>, <span class="string">"none"</span>));</span><br><span class="line">        result.put(<span class="string">"depts"</span>, Arrays.asList(<span class="string">"办公室"</span>, <span class="string">"组织部"</span>));</span><br><span class="line">        result.put(<span class="string">"menus"</span>, Arrays.asList(<span class="string">"工作台"</span>, <span class="string">"系统管理"</span>));</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="配置代理"><a href="#配置代理" class="headerlink" title="配置代理"></a>配置代理</h3><p>&emsp;&emsp;配置以下前端工程的代理转发，用于解决开发环境接口调试的跨域问题<br><img src="https://resources.chenjianhui.site/2019-02-23-front-proxy-config.png" alt></p>
+<h3 id="写个页面"><a href="#写个页面" class="headerlink" title="写个页面"></a>写个页面</h3><p>&emsp;&emsp;写个前端页面测试后端接口，进入front/package.json同级目录执行npm i axios -s，修改HelloWord.vue组件为如下代码</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"hello"</span>&gt;</span><br><span class="line">    &lt;h1 v-<span class="keyword">if</span>=<span class="string">"loading"</span>&gt;&#123;&#123; <span class="string">'正在加载用户信息'</span> &#125;&#125;&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">    &lt;h1 v-else-if="errMsg"&gt;&#123;&#123; errMsg &#125;&#125;&lt;/</span>h1&gt;</span><br><span class="line">    &lt;div v-<span class="keyword">else</span>&gt;</span><br><span class="line">      &lt;p&gt;username: &#123;&#123;userInfo.username&#125;&#125;&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">      &lt;p&gt;roles: &#123;&#123;userInfo.roles&#125;&#125;&lt;/</span>p&gt;</span><br><span class="line">      &lt;p&gt;depts: &#123;&#123;userInfo.depts&#125;&#125;&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">      &lt;p&gt;menus: &#123;&#123;userInfo.menus&#125;&#125;&lt;/</span>p&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">import axios from 'axios'</span></span><br><span class="line"><span class="regexp">export default &#123;</span></span><br><span class="line"><span class="regexp">  name: 'HelloWorld',</span></span><br><span class="line"><span class="regexp">  data () &#123;</span></span><br><span class="line"><span class="regexp">    return &#123;</span></span><br><span class="line"><span class="regexp">      loading: false,</span></span><br><span class="line"><span class="regexp">      userInfo: &#123;</span></span><br><span class="line"><span class="regexp">        username: '',</span></span><br><span class="line"><span class="regexp">        roles: [],</span></span><br><span class="line"><span class="regexp">        depts: [],</span></span><br><span class="line"><span class="regexp">        menus: []</span></span><br><span class="line"><span class="regexp">      &#125;,</span></span><br><span class="line"><span class="regexp">      errMsg: null</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">  &#125;,</span></span><br><span class="line"><span class="regexp">  created () &#123;</span></span><br><span class="line"><span class="regexp">    this.loading = true</span></span><br><span class="line"><span class="regexp">    axios.get('/</span>api/user/me<span class="string">').then(response =&gt; &#123;</span></span><br><span class="line"><span class="string">      this.userInfo = response.data</span></span><br><span class="line"><span class="string">    &#125;).catch(err =&gt; &#123;</span></span><br><span class="line"><span class="string">      console.error(err)</span></span><br><span class="line"><span class="string">      this.errMsg = err</span></span><br><span class="line"><span class="string">    &#125;).finally(() =&gt; &#123; this.loading = false &#125;)</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;!-- Add "scoped" attribute to limit CSS to this component only --&gt;</span></span><br><span class="line"><span class="string">&lt;style scoped&gt;</span></span><br><span class="line"><span class="string">h1,</span></span><br><span class="line"><span class="string">h2 &#123;</span></span><br><span class="line"><span class="string">  font-weight: normal;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">&lt;/style&gt;</span></span><br></pre></td></tr></table></figure>
+<p>进入测试链接<a href="http://localost:8081" target="_blank" rel="noopener">http://localost:8081</a></p>
+<h1 id="单点部署"><a href="#单点部署" class="headerlink" title="单点部署"></a>单点部署</h1><h2 id="nginx配置"><a href="#nginx配置" class="headerlink" title="nginx配置"></a>nginx配置</h2><p>&emsp;&emsp;分离部署主要依赖于nginx来完成，利用nginx来分发前后端的内容，nginx的配置如下<br><figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#user root;# linux下必须有此配置 不然会导致403权限不足</span></span><br><span class="line"><span class="attribute">worker_processes</span>  <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">#error_log  logs/error.log;</span></span><br><span class="line"><span class="comment">#error_log  logs/error.log  notice;</span></span><br><span class="line"><span class="comment">#error_log  logs/error.log  info;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#pid        logs/nginx.pid;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">events</span> &#123;</span><br><span class="line">    <span class="attribute">worker_connections</span>  <span class="number">1024</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">    <span class="attribute">include</span>       mime.types;</span><br><span class="line">    <span class="attribute">default_type</span>  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">log_format</span>  main  <span class="string">'<span class="variable">$remote_addr</span> - <span class="variable">$remote_user</span> [<span class="variable">$time_local</span>] "<span class="variable">$request</span>" '</span></span><br><span class="line">                      <span class="string">'<span class="variable">$status</span> <span class="variable">$body_bytes_sent</span> "<span class="variable">$http_referer</span>" '</span></span><br><span class="line">                      <span class="string">'"<span class="variable">$http_user_agent</span>" "<span class="variable">$http_x_forwarded_for</span>"'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">access_log</span>  logs/access.log  main;</span><br><span class="line">    <span class="attribute">error_log</span> logs/error.log <span class="literal">error</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">sendfile</span>        <span class="literal">on</span>;</span><br><span class="line">    <span class="comment">#tcp_nopush     on;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#keepalive_timeout  0;</span></span><br><span class="line">    <span class="attribute">keepalive_timeout</span>  <span class="number">65</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#gzip  on;</span></span><br><span class="line">	</span><br><span class="line">	<span class="section">server</span> &#123;</span><br><span class="line">		<span class="attribute">listen</span>       <span class="number">80</span>;</span><br><span class="line">		<span class="attribute">server_name</span>  localhost;</span><br><span class="line">		<span class="attribute">set</span> <span class="variable">$application_path</span> C:/workspace/java/server-front-separate;<span class="comment"># 这里的父级路径需要根据项目路径设置</span></span><br><span class="line">		</span><br><span class="line">		<span class="attribute">location</span> /api &#123;</span><br><span class="line">		    <span class="attribute">proxy_pass</span> http://localhost:8080/;</span><br><span class="line">		    <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">		    <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">		    <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="attribute">location</span> / &#123;</span><br><span class="line">		    <span class="attribute">alias</span> <span class="variable">$application_path</span>/dist/html/;</span><br><span class="line">		    <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /index.html <span class="literal">last</span>;<span class="comment"># 解决页面刷新404问题</span></span><br><span class="line">		    <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="打包前后端应用"><a href="#打包前后端应用" class="headerlink" title="打包前后端应用"></a>打包前后端应用</h2><ul>
+<li>前端应用: 进入front/package.json同级目录，执行npm run build指令</li>
+<li>后端应用: 进入server/pom.xml同级目录，执行mvn clean package指令</li>
+</ul>
+<h2 id="编写快速启动脚本（支持多环境）"><a href="#编写快速启动脚本（支持多环境）" class="headerlink" title="编写快速启动脚本（支持多环境）"></a>编写快速启动脚本（支持多环境）</h2><ul>
+<li>linux下启动脚本start.sh</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment"># 常量定义</span></span><br><span class="line"><span class="built_in">export</span> BIN_PATH=$(<span class="built_in">cd</span> `dirname <span class="variable">$0</span>`;<span class="built_in">pwd</span>)</span><br><span class="line"><span class="built_in">echo</span> BIN_PATH:[<span class="variable">$BIN_PATH</span>]</span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$BIN_PATH</span></span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"><span class="built_in">export</span> CONTEXT_PATH=`<span class="built_in">pwd</span>`</span><br><span class="line"><span class="built_in">echo</span> CONTEXT_PATH:[<span class="variable">$CONTEXT_PATH</span>]</span><br><span class="line"><span class="built_in">export</span> LOG_PATH=/data/logs/sso</span><br><span class="line"><span class="built_in">echo</span> LOG_PATH:[<span class="variable">$LOG_PATH</span>]</span><br><span class="line"><span class="comment"># 需要指定启动的模式是test，还是prod，默认是test，如果不指定的话</span></span><br><span class="line">ACTION_MODE=<span class="variable">$1</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">"<span class="variable">$ACTION_MODE</span>"</span> = <span class="string">""</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">	ACTION_MODE=<span class="built_in">test</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">echo</span> STARTING APPLICATION ACTION_MODE:[<span class="variable">$ACTION_MODE</span>]</span><br><span class="line"><span class="comment"># 判断log文件夹是否存在 不存在则创建</span></span><br><span class="line"><span class="keyword">if</span> [ ! -d <span class="variable">$LOG_PATH</span> ]; <span class="keyword">then</span></span><br><span class="line">  mkdir <span class="variable">$LOG_PATH</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="comment"># 删除历史的server.log文件</span></span><br><span class="line">rm -f <span class="variable">$LOG_PATH</span>/server.log</span><br><span class="line"><span class="comment"># 后台启动应用 并输出控制台日志</span></span><br><span class="line">nohup java -jar server-0.0.1-SNAPSHOT.jar --spring.profiles.active=<span class="variable">$ACTION_MODE</span> &gt;&gt; <span class="variable">$LOG_PATH</span>/server.log 2&gt;&amp;1 &amp;</span><br><span class="line"><span class="comment"># 显示输出前二十行的日志</span></span><br><span class="line">head -n 20 <span class="variable">$LOG_PATH</span>/server.log</span><br></pre></td></tr></table></figure>
+<ul>
+<li>windows下启动脚本start.bat</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line">:: 设置jar名称</span><br><span class="line"><span class="built_in">set</span> JAR_NAME=server-0.0.1-SNAPSHOT</span><br><span class="line">:: 常量定义</span><br><span class="line"><span class="built_in">set</span> BIN_PATH=%~dp0</span><br><span class="line"><span class="built_in">echo</span> BIN_PATH:[%BIN_PATH%]</span><br><span class="line"><span class="built_in">cd</span> %BIN_PATH%</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"><span class="built_in">set</span> CONTEXT_PATH=%<span class="built_in">cd</span>%</span><br><span class="line"><span class="built_in">echo</span> CONTEXT_PATH:[%CONTEXT_PATH%]</span><br><span class="line"><span class="built_in">echo</span> JAR_NAME:[%JAR_NAME%]</span><br><span class="line">:: 需要指定启动的模式是<span class="built_in">test</span>，还是prod，默认是<span class="built_in">test</span>，如果不指定的话</span><br><span class="line"><span class="built_in">set</span> /p ACTION_MODE_INPUT=请输入启动环境，不输入采用默认环境[<span class="built_in">test</span>]:</span><br><span class="line"><span class="keyword">if</span> not <span class="string">"%ACTION_MODE_INPUT%"</span> equ <span class="string">""</span> (<span class="built_in">set</span> ACTION_MODE=%ACTION_MODE_INPUT%) <span class="keyword">else</span> (<span class="built_in">set</span> ACTION_MODE=<span class="built_in">test</span>)</span><br><span class="line"><span class="built_in">echo</span> STARTING APPLICATION ACTION_MODE:%ACTION_MODE%</span><br><span class="line"><span class="built_in">set</span> PROCESS_NAME=JAVA_APP_%JAR_NAME%_%ACTION_MODE%</span><br><span class="line">title %PROCESS_NAME%</span><br><span class="line"><span class="built_in">echo</span> PROCESS_NAME:[%PROCESS_NAME%]</span><br><span class="line">:: 后台启动应用 并输出控制台日志</span><br><span class="line">java -jar %JAR_NAME%.jar --spring.profiles.active=%ACTION_MODE%</span><br></pre></td></tr></table></figure>
+<ul>
+<li>linux下关闭脚本stop.sh</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment"># 需要指定停止的模式是test，还是prod，默认是test，如果不指定的话默认取test</span></span><br><span class="line">ACTION_MODE=<span class="variable">$1</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">"<span class="variable">$ACTION_MODE</span>"</span> = <span class="string">""</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">	ACTION_MODE=<span class="built_in">test</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">echo</span> STOPPING APPLICATION ACTION_MODE:[<span class="variable">$ACTION_MODE</span>]</span><br><span class="line">pid=`ps -ef | grep server-0.0.1-SNAPSHOT.jar | grep <span class="variable">$ACTION_MODE</span> | grep -v grep | awk <span class="string">'&#123;print $2&#125;'</span>`</span><br><span class="line"><span class="comment"># 判断进程是否再运行 在运行则终止</span></span><br><span class="line"><span class="keyword">if</span> [ -n <span class="string">"<span class="variable">$pid</span>"</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">   <span class="built_in">kill</span> -9 <span class="variable">$pid</span></span><br><span class="line">   <span class="built_in">echo</span> application stop success</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">   <span class="built_in">echo</span> application already stop</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>windows下关闭脚本stop.bat</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line">:: 设置jar名称</span><br><span class="line"><span class="built_in">set</span> JAR_NAME=server-0.0.1-SNAPSHOT</span><br><span class="line">:: 需要指定终止的模式是<span class="built_in">test</span>，还是prod，默认是<span class="built_in">test</span>，如果不指定的话</span><br><span class="line"><span class="built_in">set</span> /p ACTION_MODE_INPUT=请输入关闭应用的运行环境，不输入采用默认环境[<span class="built_in">test</span>]:</span><br><span class="line"><span class="keyword">if</span> not <span class="string">"%ACTION_MODE_INPUT%"</span> equ <span class="string">""</span> (<span class="built_in">set</span> ACTION_MODE=%ACTION_MODE_INPUT%) <span class="keyword">else</span> (<span class="built_in">set</span> ACTION_MODE=<span class="built_in">test</span>)</span><br><span class="line"><span class="built_in">echo</span> STARTING APPLICATION ACTION_MODE:%ACTION_MODE%</span><br><span class="line"><span class="built_in">echo</span> JAR_NAME:[%JAR_NAME%]</span><br><span class="line"><span class="built_in">set</span> PROCESS_NAME=JAVA_APP_%JAR_NAME%_%ACTION_MODE%</span><br><span class="line"><span class="built_in">echo</span> PROCESS_NAME:[%PROCESS_NAME%]</span><br><span class="line">:: 杀死对应进程    </span><br><span class="line">tasklist /nh /<span class="keyword">fi</span> <span class="string">"WINDOWTITLE eq %PROCESS_NAME%"</span>|find /i <span class="string">"cmd.exe"</span> &gt;nul</span><br><span class="line"><span class="keyword">if</span> ERRORLEVEL 1 (<span class="built_in">echo</span> Application already stop) <span class="keyword">else</span> (taskkill /<span class="keyword">fi</span> <span class="string">"WINDOWTITLE eq %PROCESS_NAME%"</span> &gt;nul &amp; <span class="built_in">echo</span> Application stop success)</span><br><span class="line"><span class="built_in">echo</span> This window will close <span class="keyword">in</span> 10 seconds</span><br><span class="line">ping 127.1 -n 11 &gt;nul</span><br></pre></td></tr></table></figure>
+<h2 id="启动nginx以及后端服务"><a href="#启动nginx以及后端服务" class="headerlink" title="启动nginx以及后端服务"></a>启动nginx以及后端服务</h2><ul>
+<li>windwos<ul>
+<li>运行nginx.exe</li>
+<li>运行dist/bin/start.bat</li>
+</ul>
+</li>
+<li>linux<ul>
+<li>nginx -s start</li>
+<li>dist/bin/start.sh prod</li>
+</ul>
+</li>
+</ul>
+<h1 id="源码获取"><a href="#源码获取" class="headerlink" title="源码获取"></a>源码获取</h1><p><a href="https://github.com/calebman/server-front-separate" target="_blank" rel="noopener">https://github.com/calebman/server-front-separate</a></p>
+
+      
+    </div>
+    
+    
+    
+	
+	<div>
+      
+        
+<div>
+	<ul class="post-copyright">
+	  <li class="post-copyright-author">
+		<strong>本文作者： </strong>
+		<a href="/" title="访问 Jianhui Chen 的个人博客">Jianhui Chen</a>
+	  </li>
+	  <li class="post-copyright-link">
+		<strong>本文链接：</strong>
+		<a href="/2019-02-23-server-front-separate/" title="前后端分离开发模式的实践总结">https://chenjianhui.site/2019-02-23-server-front-separate/</a>
+	  </li>
+	  <li class="post-copyright-license">
+		<strong>版权声明： </strong>
+		<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+	  </li>
+	</ul>
+</div>
+
+      
+	</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SpringBoot/" rel="tag"># SpringBoot</a>
+          
+            <a href="/tags/vuejs/" rel="tag"># vuejs</a>
+          
+            <a href="/tags/Nginx/" rel="tag"># Nginx</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019-02-21-hello-hexo/" rel="next" title="Hello Hexo">
+                <i class="fa fa-chevron-left"></i> Hello Hexo
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019-03-01-devops-practice/" rel="prev" title="前后端分离模式下的DevOps">
+                前后端分离模式下的DevOps <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="gitalk-container"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Jianhui Chen">
+          <p class="site-author-name" itemprop="name">Jianhui Chen</p>
+           
+              <p class="site-description motion-element" itemprop="description">Full of soul, independent personality</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/calebman" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://juejin.im/user/59bc7c00f265da0644289a4b" target="_blank" title="掘金">
+                  
+                    <i class="fa fa-fw fa-tree"></i>
+                  
+                    
+                      掘金
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-link"></i>
+              推荐阅读
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.importnew.com/18633.html" title="Java HashMap工作原理及实现" target="_blank">Java HashMap工作原理及实现</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cs.usfca.edu/~galles/visualization/RedBlack.html" title="红黑树的原理在线示例" target="_blank">红黑树的原理在线示例</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#技术选型"><span class="nav-number">2.</span> <span class="nav-text">技术选型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#环境准备"><span class="nav-number">3.</span> <span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构建前后端分离工程"><span class="nav-number">4.</span> <span class="nav-text">构建前后端分离工程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录规划"><span class="nav-number">4.1.</span> <span class="nav-text">目录规划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后端工程"><span class="nav-number">4.2.</span> <span class="nav-text">后端工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前端工程"><span class="nav-number">4.3.</span> <span class="nav-text">前端工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集成测试"><span class="nav-number">4.4.</span> <span class="nav-text">集成测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#来个接口"><span class="nav-number">4.4.1.</span> <span class="nav-text">来个接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置代理"><span class="nav-number">4.4.2.</span> <span class="nav-text">配置代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写个页面"><span class="nav-number">4.4.3.</span> <span class="nav-text">写个页面</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单点部署"><span class="nav-number">5.</span> <span class="nav-text">单点部署</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx配置"><span class="nav-number">5.1.</span> <span class="nav-text">nginx配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打包前后端应用"><span class="nav-number">5.2.</span> <span class="nav-text">打包前后端应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写快速启动脚本（支持多环境）"><span class="nav-number">5.3.</span> <span class="nav-text">编写快速启动脚本（支持多环境）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动nginx以及后端服务"><span class="nav-number">5.4.</span> <span class="nav-text">启动nginx以及后端服务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#源码获取"><span class="nav-number">6.</span> <span class="nav-text">源码获取</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jianhui Chen</span>
+</div>
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数：<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+-->
+
+<!--
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+<div class="theme-info">
+  <span class="post-count">博客全站共21.4k字</span>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: 'bd0cbb30da9c24da8c7c',
+          clientSecret: 'bd64a8e8c8117d5f3e22291cd3f29f2c70e671ff',
+          repo: 'blog',
+          owner: 'calebman',
+          admin: ['calebman'],
+          id: location.pathname,
+          labels: 'gittalk'.split(',').filter(l => l),
+          perPage: 15,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        })
+
+        gitalk.render('gitalk-container')           
+       </script>
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+<!-- 页面点击小红心 -->
+<!-- <script type="text/javascript" src="/js/src/love.js"></script> -->
+<!-- 富强 -->
+<script type="text/javascript" src="/js/src/china.js"></script>
+</html>

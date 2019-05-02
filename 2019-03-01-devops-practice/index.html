@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+  
+
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="jenkins,maven,nodejs,devops,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Sincerity" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon-32x32.png?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="Jenkins+Git+Maven+Nodejs实现前后端分离项目的自动化运维">
+<meta name="keywords" content="jenkins,maven,nodejs,devops">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前后端分离模式下的DevOps">
+<meta property="og:url" content="https://chenjianhui.site/2019-03-01-devops-practice/index.html">
+<meta property="og:site_name" content="Sincerity">
+<meta property="og:description" content="Jenkins+Git+Maven+Nodejs实现前后端分离项目的自动化运维">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-home-pic.jpg">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jdk-downloads.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-tomcat-downloads.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-init-password.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-customize-jenkins.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-default-install.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-init-admin-user.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-url-config.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-config-success.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-plugin-manager-install.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-global-tools-setting.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-global-tools-setting-jdk.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-global-tools-setting-git.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-global-tools-setting-maven.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-global-tools-setting-nodejs.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-managed-files.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-managed-files-maven.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-managed-files-npm.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-unrestricted-add.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-publish-over-ssh-config.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-dingding-setting.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-dingding-notice.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-new-task.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-task-list.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-task-git.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-task-build-env-node.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-task-build-maven.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-task-build-node-linux.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-task-build-node-windows.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-task-building.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-task-build-success.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-github-webhook-setting.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-github-add-webhook.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-task-github-hook-setting.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-task-publish-over-ssh-setting.png">
+<meta property="og:image" content="https://resources.chenjianhui.site/2019-03-01-jenkins-global-env-config.png">
+<meta property="og:updated_time" content="2019-03-21T03:38:50.606Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前后端分离模式下的DevOps">
+<meta name="twitter:description" content="Jenkins+Git+Maven+Nodejs实现前后端分离项目的自动化运维">
+<meta name="twitter:image" content="https://resources.chenjianhui.site/2019-03-01-home-pic.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chenjianhui.site/2019-03-01-devops-practice/">
+
+
+
+
+
+  <title>前后端分离模式下的DevOps | Sincerity</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sincerity</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Story in work and life</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chenjianhui.site/2019-03-01-devops-practice/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jianhui Chen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sincerity">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前后端分离模式下的DevOps</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-01T11:03:25+08:00">
+                2019-03-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">•</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-th"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/运维/" itemprop="url" rel="index">
+                    <span itemprop="name">运维</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">•</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-pencil-square"></i>
+                </span>
+                
+                <span title="字数统计">
+                  3.6k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">•</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <span title="阅读时长">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">
+                  <center>Jenkins+Git+Maven+Nodejs实现前后端分离项目的自动化运维</center>
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://resources.chenjianhui.site/2019-03-01-home-pic.jpg" alt><br><a id="more"></a></p>
+<h1 id="背景概述"><a href="#背景概述" class="headerlink" title="背景概述"></a>背景概述</h1><h2 id="理解Devops"><a href="#理解Devops" class="headerlink" title="理解Devops"></a>理解Devops</h2><p>&emsp;&emsp; <a href="https://zh.wikipedia.org/wiki/DevOps" target="_blank" rel="noopener">维基百科</a>对Devops的定义是：一种重视“软件开发人员（Dev）”和“IT运维技术人员（Ops）”之间沟通合作的文化、运动或惯例。透过自动化“软件交付”和“架构变更”的流程，来使得构建、测试、发布软件能够更加地快捷、频繁和可靠。</p>
+<p>&emsp;&emsp;自动化运维以及持续集成部署是Devops的核心思想，当你发现自己每天花费了大量的时间在等待程序<strong>打包/上传至服务器等</strong>过程中时，你就应该思考，是否需要将这些重复性的行为交给机器去做，来解放自己花费在这部分的时间。</p>
+<h2 id="我为何要引入Devops"><a href="#我为何要引入Devops" class="headerlink" title="我为何要引入Devops"></a>我为何要引入Devops</h2><h3 id="背景简介"><a href="#背景简介" class="headerlink" title="背景简介"></a>背景简介</h3><p>&emsp;&emsp;楼主是一个常年在二三线城市小公司漂泊的苦逼程序员，小公司的特性就是一人当三人使，一个人兼做开发测试加运维，公司采用敏捷开发模式，现有平台<strong>4套</strong>，大部分都是前后端分离的系统，由于功能调整的比较快导致部署演示的频次非常高，最多会出现一天部署<strong>10次</strong>左右，再加上ssh文件上传与webpack的打包程序的运行时间较长，最快的<strong>本地打包</strong>+<strong>ssh上传</strong>+<strong>启动远程运行脚本</strong>的流程走下来也得5min左右，所以光部署这一块花费的人力成本已经不可忽略了。</p>
+<h3 id="应用架构简介"><a href="#应用架构简介" class="headerlink" title="应用架构简介"></a>应用架构简介</h3><p>&emsp;&emsp;楼主公司的web应用主要采用SpringBoot+Vuejs前后端分离开发模式，打包后的应用由Nginx来动静内容分发，应用架构的详情可见我的另一篇博客<a href="/2019-02-23-server-front-separate/">前后端分离开发模式的实践总结</a>，源代码获取<a href="https://github.com/calebman/server-front-separate" target="_blank" rel="noopener">点击这里</a>，本文也将围绕着这个结构的工程来做自动化部署。</p>
+<h3 id="冲突与问题"><a href="#冲突与问题" class="headerlink" title="冲突与问题"></a>冲突与问题</h3><ul>
+<li>等待程序打包时间过长（特别是webpack的打包），大部分时间在等待，这件事在进行中也不好做别的事情</li>
+<li>重复性劳动过多，每次打包都是运行打包脚本，上传打包后的文件夹，运行远程启动脚本</li>
+<li>容易出错，假设现有的环境是两套（演示与生产），那么远端运行脚本需要根据环境的不同来传递不同的环境变量，人为错误极易发生</li>
+</ul>
+<h3 id="理想环境"><a href="#理想环境" class="headerlink" title="理想环境"></a>理想环境</h3><ul>
+<li><strong>程序员</strong>提交代码至dev分支，此时触发演示环境的打包部署程序</li>
+<li><strong>技术老大</strong>提交代码至master分支，此时触发生产环境的打包部署程序</li>
+<li>打包成功/失败/中断通知到钉钉工作群</li>
+</ul>
+<h1 id="Devops实践"><a href="#Devops实践" class="headerlink" title="Devops实践"></a>Devops实践</h1><h2 id="Windows10环境搭建"><a href="#Windows10环境搭建" class="headerlink" title="Windows10环境搭建"></a>Windows10环境搭建</h2><ul>
+<li>java：<a href="https://www.cnblogs.com/smyhvae/p/3788534.html" target="_blank" rel="noopener">JDK开发环境搭建及环境变量配置</a></li>
+<li>tomcat：<a href="https://blog.csdn.net/haishu_zheng/article/details/50768272" target="_blank" rel="noopener">Windows安装和配置Tomcat</a></li>
+<li>git：<a href="https://www.jianshu.com/p/414ccd423efc" target="_blank" rel="noopener">Git安装教程</a></li>
+<li>jenkins<ul>
+<li><a href="http://mirrors.jenkins-ci.org/war/latest/jenkins.war" target="_blank" rel="noopener">点此下载jenkins的war包</a></li>
+<li>将jenkins.war复制到tomcat服务器的webapps目录下</li>
+<li>配置jenkins的工作目录，在我的电脑-属性-高级系统设置-环境变量-添加系统变量JENKINS_HOME，内容是一个空的文件夹，作为jenkins的工作目录。<strong>如果不想设置系统环境变量</strong>也可以修改加载有jenkins.war的tomcat目录下的conf\context.xm文件，如下设置JENKINS_HOME</li>
+<li>访问jenkins的主页<a href="http://localhost:8080/jenkins" target="_blank" rel="noopener">http://localhost:8080/jenkins</a></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- tomcat context.xml 环境变量设置 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Context</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 设置jenkins的工作目录 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Environment</span> <span class="attr">name</span>=<span class="string">"JENKINS_HOME"</span> <span class="attr">value</span>=<span class="string">"C:/jenkins/"</span> <span class="attr">type</span>=<span class="string">"java.lang.String"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Context</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="CentOS7-3环境搭建"><a href="#CentOS7-3环境搭建" class="headerlink" title="CentOS7.3环境搭建"></a>CentOS7.3环境搭建</h2><p>&emsp;&emsp;在CentOS7下搭建jenkins和Windows环境差不多，jenkins是一个依赖于web容易的war包，所以只要有java与tomcat环境即可</p>
+<h3 id="git环境"><a href="#git环境" class="headerlink" title="git环境"></a>git环境</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 判断git是否已存在 打印内容则代表存在</span></span><br><span class="line">git --version</span><br><span class="line"><span class="comment"># 不存在则安装 出现complete说明安装成功</span></span><br><span class="line">yum install -y git</span><br></pre></td></tr></table></figure>
+<h3 id="jdk环境"><a href="#jdk环境" class="headerlink" title="jdk环境"></a>jdk环境</h3><ol>
+<li>jdk1.8下载：<a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">点此下载</a></li>
+</ol>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jdk-downloads.png" alt></p>
+<ol start="2">
+<li>解压配置</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir /usr/java</span><br><span class="line"><span class="comment"># 使用Xftp将下载的jdk放到此目录</span></span><br><span class="line"><span class="built_in">cd</span> /usr/java</span><br><span class="line"><span class="comment"># 解压jdk</span></span><br><span class="line">tar -zxvf jdk-8u201-linux-x64.tar.gz </span><br><span class="line"><span class="comment"># 修改配置文件</span></span><br><span class="line">vim /etc/profile</span><br><span class="line"><span class="comment"># 文件末尾添加java的环境变量</span></span><br><span class="line"></span><br><span class="line">JAVA_HOME=/usr/java/jdk1.8.0_201</span><br><span class="line">JRE_HOME=/usr/java/jdk1.8.0_201/jre</span><br><span class="line">PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$JRE_HOME</span>/bin</span><br><span class="line">CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/lib/dt.jar:<span class="variable">$JAVA_HOME</span>/lib/tools.jar:<span class="variable">$JRE_HOME</span>/lib</span><br><span class="line"><span class="built_in">export</span> JAVA_HOME JRE_HOME PATH CLASSPATH</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使得配置生效</span></span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br><span class="line"><span class="comment"># 测试配置</span></span><br><span class="line">java -version</span><br></pre></td></tr></table></figure>
+<h3 id="tomcat环境"><a href="#tomcat环境" class="headerlink" title="tomcat环境"></a>tomcat环境</h3><ol>
+<li>tomcat8下载：<a href="https://tomcat.apache.org/download-80.cgi" target="_blank" rel="noopener">点此下载</a></li>
+</ol>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-tomcat-downloads.png" alt></p>
+<ol start="2">
+<li>解压配置</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 使用Xftp将下载的tomcat放到此目录</span></span><br><span class="line">mkdir /usr/tomcat</span><br><span class="line"><span class="built_in">cd</span> /usr/tomcat</span><br><span class="line"><span class="comment"># 解压tomcat</span></span><br><span class="line">tar -zxvf apache-tomcat-8.5.38.tar.gz </span><br><span class="line"><span class="comment"># 测试运行</span></span><br><span class="line"><span class="built_in">cd</span> apache-tomcat-8.5.38</span><br><span class="line">sh bin/startup.sh</span><br><span class="line"><span class="comment"># 检测服务是否成功启动 打印了进程即说明启动成功</span></span><br><span class="line">netstat -nlp|grep 8080</span><br><span class="line"><span class="comment"># 稍微清理一下tomcat 删除没有用的项目</span></span><br><span class="line">rm -rf /usr/tomcat/apache-tomcat-8.5.38/webapps/*</span><br><span class="line"><span class="comment"># 配置自动启动 /etc/rc.d/init.d 为启动运行脚本的目录</span></span><br><span class="line"><span class="built_in">cd</span> /etc/rc.d/init.d</span><br><span class="line"><span class="comment"># 创建自启动脚本</span></span><br><span class="line">touch tomcat</span><br><span class="line"><span class="comment"># 写入脚本信息</span></span><br><span class="line">vim tomcat</span><br><span class="line"><span class="comment"># 脚本信息如下 以下注释信息也需要复制进脚本文件 </span></span><br><span class="line"><span class="comment"># 如果缺少了chkconfig:234 20 80这个注释会报错无法识别为自启脚本</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment">#chkconfig:234 20 80  </span></span><br><span class="line"><span class="comment">#description:tomcat</span></span><br><span class="line">JAVA_HOME=/usr/java/jdk1.8.0_201</span><br><span class="line"><span class="built_in">export</span> JAVA_HOME</span><br><span class="line">PATH=<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$PATH</span> </span><br><span class="line"><span class="built_in">export</span> PATH</span><br><span class="line">tomcat_path=/usr/tomcat/apache-tomcat-8.5.38/bin</span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$1</span>"</span> <span class="keyword">in</span></span><br><span class="line">        start)</span><br><span class="line">                <span class="built_in">echo</span> <span class="string">"start tomcat service.."</span></span><br><span class="line">                sh <span class="variable">$&#123;tomcat_path&#125;</span>/startup.sh</span><br><span class="line">                ;;</span><br><span class="line">        *)</span><br><span class="line">        <span class="built_in">exit</span> 1</span><br><span class="line">        ;;</span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 赋予权限</span></span><br><span class="line">chmod 755 tomcat</span><br><span class="line"><span class="comment"># 注册tomcat服务自启</span></span><br><span class="line">chkconfig --add tomcat</span><br><span class="line"><span class="comment"># 测试服务是否能够自启 先停止运行中的tomcat</span></span><br><span class="line">sh /usr/tomcat/apache-tomcat-8.5.38/bin/shutdown.sh</span><br><span class="line">service tomcat start</span><br><span class="line">netstat -nlp|grep 8080</span><br><span class="line"><span class="comment"># 查看所有注册自启的服务</span></span><br><span class="line">chkconfig</span><br></pre></td></tr></table></figure>
+<h3 id="jenkins环境"><a href="#jenkins环境" class="headerlink" title="jenkins环境"></a>jenkins环境</h3><ol>
+<li><p>jenkins下载：<a href="http://mirrors.jenkins-ci.org/war/latest/jenkins.war" target="_blank" rel="noopener">点此下载</a></p>
+</li>
+<li><p>配置</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir /usr/jenkins</span><br><span class="line"><span class="comment"># 使用Xftp将下载的tomcat放到此目录</span></span><br><span class="line"><span class="built_in">cd</span> /usr/jenkins</span><br><span class="line"><span class="comment"># 复制jenkins.war至tomcat/webapps目录</span></span><br><span class="line">cp jenkins.war /usr/tomcat/apache-tomcat-8.5.38/webapps</span><br><span class="line"><span class="comment"># jenkins.war会自动解包启动 进入tomcat/webapps目录查看 jenkins.war已经解包成了文件夹</span></span><br><span class="line"><span class="built_in">cd</span> /usr/tomcat/apache-tomcat-8.5.38/webapps</span><br><span class="line">ls</span><br><span class="line"><span class="comment"># 修改tomcat环境配置将jenkins的工作目录切换至/home/app/jenkins</span></span><br><span class="line">vi /usr/tomcat/apache-tomcat-8.5.38/conf/context.xml</span><br><span class="line"><span class="comment"># Context标签下添加以下内容</span></span><br><span class="line"></span><br><span class="line">&lt;Environment name=<span class="string">"JENKINS_HOME"</span> value=<span class="string">"/home/app/jenkins"</span> <span class="built_in">type</span>=<span class="string">"java.lang.String"</span>/&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启tomcat</span></span><br><span class="line"><span class="built_in">cd</span> /usr/tomcat/apache-tomcat-8.5.38</span><br><span class="line">sh bin/shutdown.sh</span><br><span class="line">sh bin/startup.sh</span><br><span class="line"><span class="comment"># 检查工作目录切换是否成功 有文件即成功</span></span><br><span class="line"><span class="built_in">cd</span> /home/app/jenkins</span><br><span class="line"><span class="comment"># 清空原先的工作空间 jenkins默认工作空间为 /root/.jenkins</span></span><br><span class="line">rm -rf /root/.jenkins</span><br></pre></td></tr></table></figure>
+<h2 id="配置Jenkins"><a href="#配置Jenkins" class="headerlink" title="配置Jenkins"></a>配置Jenkins</h2><h3 id="Jenkins的初始化"><a href="#Jenkins的初始化" class="headerlink" title="Jenkins的初始化"></a>Jenkins的初始化</h3><blockquote>
+<p>第一次进入jenkins时会要求使用初始密码解锁，按照提示操作就行了</p>
+</blockquote>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-init-password.png" alt></p>
+<blockquote>
+<p>之后会提示你安装插件，在这里我们采用默认安装必要的插件即可，其他的插件我们可以在系统内部再去安装</p>
+</blockquote>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-customize-jenkins.png" alt></p>
+<blockquote>
+<p>耐心等待插件安装完毕</p>
+</blockquote>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-default-install.png" alt></p>
+<blockquote>
+<p>初始化完成，配置管理员用户</p>
+</blockquote>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-init-admin-user.png" alt></p>
+<blockquote>
+<p>配置jenkins实例地址，举个例子解释实例配置的地址用处</p>
+<p>假设你做了项目打包成功或者失败的通知，jenkins构建的默认通知信息里会带有一个进入系统的链接地址，方便用户直接从<strong>邮件/钉钉</strong>等地方进入系统查看构建详情，这个地址即是此处配置的实例地址</p>
+</blockquote>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-url-config.png" alt></p>
+<blockquote>
+<p>所有配置完成后，成功进入系统</p>
+</blockquote>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-config-success.png" alt></p>
+<h3 id="Jenkins的环境配置"><a href="#Jenkins的环境配置" class="headerlink" title="Jenkins的环境配置"></a>Jenkins的环境配置</h3><h4 id="环境需求分析"><a href="#环境需求分析" class="headerlink" title="环境需求分析"></a>环境需求分析</h4><ol>
+<li>拉取远端master分支代码：<strong>Git插件</strong></li>
+<li>运行前端打包脚本：<strong>Nodejs环境</strong></li>
+<li>运行后端打包脚本：<strong>Java环境+Maven插件</strong></li>
+<li>推送装有构建代码的文件夹：<strong>SSH文件传输插件</strong> </li>
+<li>运行远程启动脚本：<strong>SSH脚本运行插件</strong></li>
+</ol>
+<h4 id="配置插件"><a href="#配置插件" class="headerlink" title="配置插件"></a>配置插件</h4><p>&emsp;&emsp;对应<strong>jenkins/系统管理/插件管理</strong>目录，根据上述的打包流程得出插件需求，在<a href="https://www.baidu.com" target="_blank" rel="noopener">baidu</a>/<a href="https://www.google.com" target="_blank" rel="noopener">google</a>搜索得到jenkins上对应的插件名称，选择并安装它们。</p>
+<ul>
+<li>插件的选择<ul>
+<li><strong>Publish Over SSH</strong>：基于SSH协议的文件上传插件</li>
+<li><strong>Nodejs</strong>：nodejs运行环境</li>
+<li><strong>Dingding</strong>：钉钉推送通知</li>
+<li><strong>Maven Integration</strong>：Maven插件</li>
+</ul>
+</li>
+<li>插件的安装<ul>
+<li>进入jenkins-系统管理-插件管理</li>
+<li>选择available（可选插件）标签</li>
+<li>搜索出以上选择的插件，勾选之后点击直接安装</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-plugin-manager-install.png" alt></p>
+<h4 id="配置全局工具"><a href="#配置全局工具" class="headerlink" title="配置全局工具"></a>配置全局工具</h4><p>&emsp;&emsp;对应<strong>jenkins/系统管理/全局工具配置</strong>目录，主要是配置打包所需的环境，如Java/Git/Maven等等，如果系统自带环境可以填写系统环境，如果没有可以采用jenkins自动安装的方式。</p>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-global-tools-setting.png" alt></p>
+<ol>
+<li>JDK配置</li>
+</ol>
+<blockquote>
+<p>tips：如果找不到java的安装目录可以使用 which java 查看</p>
+</blockquote>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-global-tools-setting-jdk.png" alt></p>
+<ol start="2">
+<li>Git配置</li>
+</ol>
+<blockquote>
+<p>tips：如果找不到git的安装目录可以使用 which git 查看</p>
+</blockquote>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-global-tools-setting-git.png" alt></p>
+<ol start="3">
+<li>Maven配置</li>
+</ol>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-global-tools-setting-maven.png" alt></p>
+<ol start="4">
+<li>NodeJS配置</li>
+</ol>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-global-tools-setting-nodejs.png" alt></p>
+<h4 id="配置文件管理"><a href="#配置文件管理" class="headerlink" title="配置文件管理"></a>配置文件管理</h4><p>&emsp;&emsp;对应<strong>jenkins/系统管理/Managed files</strong>目录，主要是管理自定义的配置文件，如Maven的settings.xml，Npm的npmrc.config文件等等，我们在这主要配置一下Maven和Npm的仓库镜像，使其切换到国内的阿里云的Maven镜像和淘宝的Npm镜像。</p>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-managed-files.png" alt></p>
+<ol>
+<li>Maven settings.xml</li>
+</ol>
+<p>&emsp;&emsp;新增Maven settings.xml配置文件，在mirrors标签下添加以下配置<br><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>alimaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun maven<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span>          </span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-managed-files-maven.png" alt></p>
+<ol start="2">
+<li>Npm config file</li>
+</ol>
+<p>&emsp;&emsp;新增Npm config file配置文件，修改registry的配置<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-managed-files-npm.png" alt></p>
+<h4 id="配置全局凭据"><a href="#配置全局凭据" class="headerlink" title="配置全局凭据"></a>配置全局凭据</h4><p>&emsp;&emsp;对应<strong>jenkins/凭据/系统/全局凭据</strong>目录，主要是用于添加如gitlab/ssh等受限访问应用的信任凭据。</p>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-unrestricted-add.png" alt></p>
+<h4 id="其他配置"><a href="#其他配置" class="headerlink" title="其他配置"></a>其他配置</h4><ol>
+<li><strong>Publish over SSH</strong>插件</li>
+</ol>
+<p>&emsp;&emsp;该插件的配置在<strong>jenkins/系统管理/系统设置</strong>目录，主要的配置如下：</p>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-publish-over-ssh-config.png" alt></p>
+<p>&emsp;&emsp;高级配置下还可以配置SSH端口，重置默认设置等等，这里不做过多讲解</p>
+<ol start="2">
+<li><strong>Dingding通知</strong>使用</li>
+</ol>
+<p>&emsp;&emsp;钉钉通知的配置在任务的配置项中，配置起来较为简单（比微信通知简单太多）只需要两步操作。</p>
+<p>（1）获取钉钉通知自定义机器人webhook的access_token，<a href="https://open-doc.dingtalk.com/docs/doc.htm?treeId=257&amp;articleId=105735&amp;docType=1" target="_blank" rel="noopener">点此进入</a>钉钉开放平台获取配置帮助</p>
+<p>（2）在任务中配置通知<br><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-dingding-setting.png" alt></p>
+<p>&emsp;&emsp;通知效果如图，点击即可进入jenkins管理平台查看详情</p>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-dingding-notice.png" alt></p>
+<h3 id="Jenkins的任务配置"><a href="#Jenkins的任务配置" class="headerlink" title="Jenkins的任务配置"></a>Jenkins的任务配置</h3><p>&emsp;&emsp;至此基于一个前后端分离项目的自动打包配置已经基本完成，现在我们使用jenkins构建一个任务来测试配置是否成功，本次构建任务是基于我的一个开源模板项目<a href="https://github.com/calebman/server-front-separate.git" target="_blank" rel="noopener">server-front-separate</a>来进行。</p>
+<h4 id="新建任务"><a href="#新建任务" class="headerlink" title="新建任务"></a>新建任务</h4><p>&emsp;&emsp;进入jenkins根目录点击新建任务<br><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-new-task.png" alt></p>
+<p>&emsp;&emsp;任务新建成功<br><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-task-list.png" alt></p>
+<h4 id="任务基础配置"><a href="#任务基础配置" class="headerlink" title="任务基础配置"></a>任务基础配置</h4><p>&emsp;&emsp;本次的基础配置我们需要达到任务能够自动化打包的效果，为达到此效果我们至少需要配置以下几项内容：</p>
+<ul>
+<li>源码管理</li>
+<li>构建环境</li>
+<li>后端构建步骤</li>
+<li>前端构建步骤</li>
+</ul>
+<ol>
+<li>源码管理</li>
+</ol>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-task-git.png" alt></p>
+<ol start="2">
+<li>构建环境</li>
+</ol>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-task-build-env-node.png" alt></p>
+<ol start="3">
+<li>后端构建步骤</li>
+</ol>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-task-build-maven.png" alt></p>
+<ol start="4">
+<li>前端构建步骤</li>
+</ol>
+<blockquote>
+<p>linux环境下采用Shell脚本构建，换行分割指令</p>
+</blockquote>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-task-build-node-linux.png" alt></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> front/</span><br><span class="line">node -v</span><br><span class="line">npm -v</span><br><span class="line">npm i</span><br><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Windows环境下采用批处理脚本构建，使用&amp;与&amp;&amp;来连接指令，&amp;代表下一条指令必定执行，&amp;&amp;代表当上一条指令出现错误下一条指令不执行</p>
+</blockquote>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-task-build-node-windows.png" alt></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> front/ &amp; node -v &amp; npm -v &amp; npm i &amp;&amp; npm run build</span><br></pre></td></tr></table></figure>
+<h4 id="构建运行"><a href="#构建运行" class="headerlink" title="构建运行"></a>构建运行</h4><p>&emsp;&emsp;基础配置完成后，我们进入项目主页进行一次构建测试</p>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-task-building.png" alt></p>
+<p>&emsp;&emsp;构建成功后进入任务的工作空间，可以查看到项目已经打包成功，项目的目录结构描述详见我的另一篇博客<a href="/2019-02-23-server-front-separate/">前后端分离开发模式的实践总结</a></p>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-task-build-success.png" alt></p>
+<h3 id="Jenkins任务自动化"><a href="#Jenkins任务自动化" class="headerlink" title="Jenkins任务自动化"></a>Jenkins任务自动化</h3><p>&emsp;&emsp;至此项目已经能够通过jenkins平台来进行打包操作了，但是这还远远没达到<strong>自动化</strong>的概念，我们的目标是通过<strong>git代码提交操作来触发构建</strong>并且<strong>自动部署</strong>到生产/演示服务器上，所以接下来进行自动化的配置工作</p>
+<h4 id="自动构建"><a href="#自动构建" class="headerlink" title="自动构建"></a>自动构建</h4><p>&emsp;&emsp;自动构建是指通过Git服务器的Webhooks来触发Jenkins的打包构建流程，在这里我们将实现以下流程：</p>
+<ul>
+<li>更新代码至github项目的master分支</li>
+<li>jenkins开始构建代码</li>
+</ul>
+<p>&emsp;&emsp;jenkins默认对github的webhook有支持使得这个流程的配置非常简单，jenkins的webhook触发地址为<strong>${JENKINS_URL}/github-webhook/</strong>，其中JENKINS_URL为jenkins服务在公网的根目录地址，可以在<strong>jenkins/系统管理/系统设置</strong>处修改此默认地址</p>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-github-webhook-setting.png" alt></p>
+<p>&emsp;&emsp;得到Webhook地址后我们只需要在github的项目Settings选项卡上添加此地址即可，github默认触发Webhook的逻辑是push代码时即触发</p>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-github-add-webhook.png" alt></p>
+<p>&emsp;&emsp;当然，别忘记了在jenkins的任务中勾选Github hook触发构建</p>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-task-github-hook-setting.png" alt></p>
+<h4 id="自动部署"><a href="#自动部署" class="headerlink" title="自动部署"></a>自动部署</h4><p>&emsp;&emsp;自动部署是指在代码构建完成后将生成的发布代码推送到远程服务器中并启动它们，流程如下：</p>
+<ul>
+<li>代码构建成功后上传打包目录</li>
+<li>运行远程脚本重启服务</li>
+</ul>
+<p>&emsp;&emsp;上文我们讲到<strong>Publish Over SSH</strong>这个插件能够远程推送代码并运行脚本，自动部署的功能即依赖此插件，配置如下：</p>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-task-publish-over-ssh-setting.png" alt></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 定义脚本执行地址</span></span><br><span class="line"><span class="built_in">export</span> COMMAND_PATH=/home/app/application/server-front-separate/bin</span><br><span class="line"><span class="comment"># 将所有脚本文件转换为UNIX格式</span></span><br><span class="line">sed -i <span class="string">'s/\r//'</span> <span class="variable">$COMMAND_PATH</span>/*.sh</span><br><span class="line"><span class="comment"># 停止服务</span></span><br><span class="line">sh <span class="variable">$COMMAND_PATH</span>/stop.sh <span class="built_in">test</span></span><br><span class="line"><span class="comment"># 启动服务</span></span><br><span class="line">sh <span class="variable">$COMMAND_PATH</span>/start.sh <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<h4 id="构建通知"><a href="#构建通知" class="headerlink" title="构建通知"></a>构建通知</h4><p>&emsp;&emsp;在这里我们使用钉钉来做通知功能，钉钉通知的配置在上文已经介绍过了，通知的的类型有四种，我们需要哪种类型的通知直接勾选即可，四种通知类型正好对应jenkins任务构建的三种状态：</p>
+<ul>
+<li>成功：构建步骤与构建后的操作全部成功，对应<strong>构建成功时通知</strong></li>
+<li>失败：构建步骤失败，对应<strong>构建失败时通知</strong></li>
+<li>不稳定：构建步骤成功但构建后的操作存在失败的情况，对应<strong>构建中断时通知</strong></li>
+</ul>
+<h3 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h3><h4 id="中文乱码"><a href="#中文乱码" class="headerlink" title="中文乱码"></a>中文乱码</h4><p>&emsp;&emsp;在<strong>jenkins/系统管理/系统设置</strong>中添加全局属性：</p>
+<p><img src="https://resources.chenjianhui.site/2019-03-01-jenkins-global-env-config.png" alt></p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://blog.csdn.net/houyefeng/article/details/51027885" target="_blank" rel="noopener">Jenkins——应用篇——插件使用——Publish over SSH</a><br><a href="https://blog.csdn.net/workdsz/article/details/77947183" target="_blank" rel="noopener">jenkins 集成钉钉机器人</a><br><a href="https://blog.csdn.net/ZZY1078689276/article/details/77839045" target="_blank" rel="noopener">Jenkins之解决乱码问题</a><br><a href="https://blog.csdn.net/qq_21768483/article/details/80177920" target="_blank" rel="noopener">Jenkins与Github集成 webhook配置</a></p>
+
+      
+    </div>
+    
+    
+    
+	
+	<div>
+      
+        
+<div>
+	<ul class="post-copyright">
+	  <li class="post-copyright-author">
+		<strong>本文作者： </strong>
+		<a href="/" title="访问 Jianhui Chen 的个人博客">Jianhui Chen</a>
+	  </li>
+	  <li class="post-copyright-link">
+		<strong>本文链接：</strong>
+		<a href="/2019-03-01-devops-practice/" title="前后端分离模式下的DevOps">https://chenjianhui.site/2019-03-01-devops-practice/</a>
+	  </li>
+	  <li class="post-copyright-license">
+		<strong>版权声明： </strong>
+		<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+	  </li>
+	</ul>
+</div>
+
+      
+	</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jenkins/" rel="tag"># jenkins</a>
+          
+            <a href="/tags/maven/" rel="tag"># maven</a>
+          
+            <a href="/tags/nodejs/" rel="tag"># nodejs</a>
+          
+            <a href="/tags/devops/" rel="tag"># devops</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019-02-23-server-front-separate/" rel="next" title="前后端分离开发模式的实践总结">
+                <i class="fa fa-chevron-left"></i> 前后端分离开发模式的实践总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019-03-07-blog-with-jenkins/" rel="prev" title="我的博客可以自己部署啦">
+                我的博客可以自己部署啦 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="gitalk-container"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Jianhui Chen">
+          <p class="site-author-name" itemprop="name">Jianhui Chen</p>
+           
+              <p class="site-description motion-element" itemprop="description">Full of soul, independent personality</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/calebman" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://juejin.im/user/59bc7c00f265da0644289a4b" target="_blank" title="掘金">
+                  
+                    <i class="fa fa-fw fa-tree"></i>
+                  
+                    
+                      掘金
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-link"></i>
+              推荐阅读
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.importnew.com/18633.html" title="Java HashMap工作原理及实现" target="_blank">Java HashMap工作原理及实现</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cs.usfca.edu/~galles/visualization/RedBlack.html" title="红黑树的原理在线示例" target="_blank">红黑树的原理在线示例</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景概述"><span class="nav-number">1.</span> <span class="nav-text">背景概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#理解Devops"><span class="nav-number">1.1.</span> <span class="nav-text">理解Devops</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我为何要引入Devops"><span class="nav-number">1.2.</span> <span class="nav-text">我为何要引入Devops</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景简介"><span class="nav-number">1.2.1.</span> <span class="nav-text">背景简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用架构简介"><span class="nav-number">1.2.2.</span> <span class="nav-text">应用架构简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#冲突与问题"><span class="nav-number">1.2.3.</span> <span class="nav-text">冲突与问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#理想环境"><span class="nav-number">1.2.4.</span> <span class="nav-text">理想环境</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Devops实践"><span class="nav-number">2.</span> <span class="nav-text">Devops实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows10环境搭建"><span class="nav-number">2.1.</span> <span class="nav-text">Windows10环境搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CentOS7-3环境搭建"><span class="nav-number">2.2.</span> <span class="nav-text">CentOS7.3环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git环境"><span class="nav-number">2.2.1.</span> <span class="nav-text">git环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jdk环境"><span class="nav-number">2.2.2.</span> <span class="nav-text">jdk环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tomcat环境"><span class="nav-number">2.2.3.</span> <span class="nav-text">tomcat环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jenkins环境"><span class="nav-number">2.2.4.</span> <span class="nav-text">jenkins环境</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Jenkins"><span class="nav-number">2.3.</span> <span class="nav-text">配置Jenkins</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Jenkins的初始化"><span class="nav-number">2.3.1.</span> <span class="nav-text">Jenkins的初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jenkins的环境配置"><span class="nav-number">2.3.2.</span> <span class="nav-text">Jenkins的环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#环境需求分析"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">环境需求分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置插件"><span class="nav-number">2.3.2.2.</span> <span class="nav-text">配置插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置全局工具"><span class="nav-number">2.3.2.3.</span> <span class="nav-text">配置全局工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置文件管理"><span class="nav-number">2.3.2.4.</span> <span class="nav-text">配置文件管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置全局凭据"><span class="nav-number">2.3.2.5.</span> <span class="nav-text">配置全局凭据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他配置"><span class="nav-number">2.3.2.6.</span> <span class="nav-text">其他配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jenkins的任务配置"><span class="nav-number">2.3.3.</span> <span class="nav-text">Jenkins的任务配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#新建任务"><span class="nav-number">2.3.3.1.</span> <span class="nav-text">新建任务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#任务基础配置"><span class="nav-number">2.3.3.2.</span> <span class="nav-text">任务基础配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构建运行"><span class="nav-number">2.3.3.3.</span> <span class="nav-text">构建运行</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jenkins任务自动化"><span class="nav-number">2.3.4.</span> <span class="nav-text">Jenkins任务自动化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#自动构建"><span class="nav-number">2.3.4.1.</span> <span class="nav-text">自动构建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自动部署"><span class="nav-number">2.3.4.2.</span> <span class="nav-text">自动部署</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构建通知"><span class="nav-number">2.3.4.3.</span> <span class="nav-text">构建通知</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见问题"><span class="nav-number">2.3.5.</span> <span class="nav-text">常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#中文乱码"><span class="nav-number">2.3.5.1.</span> <span class="nav-text">中文乱码</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jianhui Chen</span>
+</div>
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数：<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+-->
+
+<!--
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+<div class="theme-info">
+  <span class="post-count">博客全站共21.4k字</span>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: 'bd0cbb30da9c24da8c7c',
+          clientSecret: 'bd64a8e8c8117d5f3e22291cd3f29f2c70e671ff',
+          repo: 'blog',
+          owner: 'calebman',
+          admin: ['calebman'],
+          id: location.pathname,
+          labels: 'gittalk'.split(',').filter(l => l),
+          perPage: 15,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        })
+
+        gitalk.render('gitalk-container')           
+       </script>
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+<!-- 页面点击小红心 -->
+<!-- <script type="text/javascript" src="/js/src/love.js"></script> -->
+<!-- 富强 -->
+<script type="text/javascript" src="/js/src/china.js"></script>
+</html>

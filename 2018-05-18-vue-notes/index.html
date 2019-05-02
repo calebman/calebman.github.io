@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+  
+
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="vuejs,vue-router,vuex,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Sincerity" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon-32x32.png?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="好记性不如烂笔头，多造轮子多做笔记">
+<meta name="keywords" content="vuejs,vue-router,vuex">
+<meta property="og:type" content="article">
+<meta property="og:title" content="纯正后端的vue轮子笔记">
+<meta property="og:url" content="https://chenjianhui.site/2018-05-18-vue-notes/index.html">
+<meta property="og:site_name" content="Sincerity">
+<meta property="og:description" content="好记性不如烂笔头，多造轮子多做笔记">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://resources.chenjianhui.site/2018-05-18-home-pic.png">
+<meta property="og:updated_time" content="2019-03-21T03:38:31.809Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="纯正后端的vue轮子笔记">
+<meta name="twitter:description" content="好记性不如烂笔头，多造轮子多做笔记">
+<meta name="twitter:image" content="https://resources.chenjianhui.site/2018-05-18-home-pic.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chenjianhui.site/2018-05-18-vue-notes/">
+
+
+
+
+
+  <title>纯正后端的vue轮子笔记 | Sincerity</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sincerity</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Story in work and life</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chenjianhui.site/2018-05-18-vue-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jianhui Chen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sincerity">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">纯正后端的vue轮子笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-18T14:10:22+08:00">
+                2018-05-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">•</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-th"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">•</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-pencil-square"></i>
+                </span>
+                
+                <span title="字数统计">
+                  4.8k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">•</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <span title="阅读时长">
+                  22
+                </span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">
+                  <center>好记性不如烂笔头，多造轮子多做笔记</center>
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://resources.chenjianhui.site/2018-05-18-home-pic.png" alt></p>
+<a id="more"></a>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>由于公司需要，<strong>我</strong>作为一个<strong>纯正的</strong>后端工程师，已经自学了半年多的vue了，愣是被逼成了一个小全栈，当然，小全栈这是往好听了说，事实上就是个前后端深度都不足的小菜鸡，在深知自己众多不足以及明白好记性不如<strong>烂</strong>笔头的道理下，多造轮子多做笔记总是不会错的：）</p>
+<p>所以最近得空我把我刚学vuejs的时候写的<a href="https://github.com/calebman/vue-DBM" target="_blank" rel="noopener">烂工程</a>重构了一下，重构的时候针对性的分模块做了一些笔记如下</p>
+<ul>
+<li>路由</li>
+<li>状态管理</li>
+<li>权限管理</li>
+<li>控件封装与使用</li>
+<li>混入</li>
+<li>数据模拟</li>
+<li>打包优化与用户体验</li>
+</ul>
+<p>如果不想拉这么长可以去 <a href="https://github.com/calebman/vue-DBM#%E5%BC%80%E5%8F%91%E5%89%8D%E5%87%86%E5%A4%87" target="_blank" rel="noopener">全球最大的同性交友网站</a> 查看</p>
+<h2 id="进入烂笔头模式"><a href="#进入烂笔头模式" class="headerlink" title="进入烂笔头模式"></a>进入烂笔头模式</h2><blockquote>
+<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3></blockquote>
+<h3 id="1-路由加载"><a href="#1-路由加载" class="headerlink" title="1. 路由加载"></a>1. 路由加载</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 直接加载页面</span></span><br><span class="line"><span class="keyword">import</span> page <span class="keyword">from</span> <span class="string">'@/views/page'</span>;</span><br><span class="line"><span class="comment">// 懒加载页面</span></span><br><span class="line">() =&gt; <span class="keyword">import</span>(<span class="string">'@/views/page'</span>);</span><br><span class="line"><span class="comment">// 指定打包名称的懒加载，可将多个页面打包成一个js进行加载</span></span><br><span class="line">() =&gt; <span class="keyword">import</span>(<span class="comment">/* webpackChunkName: "group-page" */</span><span class="string">'@/views/page1'</span>);</span><br><span class="line">() =&gt; <span class="keyword">import</span>(<span class="comment">/* webpackChunkName: "group-page" */</span><span class="string">'@/views/page2'</span>);</span><br><span class="line">() =&gt; <span class="keyword">import</span>(<span class="comment">/* webpackChunkName: "group-page" */</span><span class="string">'@/views/page3'</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="2-404路由"><a href="#2-404路由" class="headerlink" title="2. 404路由"></a>2. 404路由</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 加载一个404页面</span></span><br><span class="line"><span class="keyword">import</span> page404 <span class="keyword">from</span> <span class="string">'@/views/page404'</span>;</span><br><span class="line"><span class="comment">// 将以下路由配置放置在路由表的最末端，当路径无法匹配前面的所有路由时将会跳转至page404组件页面</span></span><br><span class="line">&#123; <span class="attr">path</span>: <span class="string">'*'</span>, <span class="attr">component</span>: page404&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-路由拦截"><a href="#3-路由拦截" class="headerlink" title="3. 路由拦截"></a>3. 路由拦截</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 路由跳转前的拦截器</span></span><br><span class="line">router.beforeEach(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</span><br><span class="line">  </span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 路由跳转后的拦截器</span></span><br><span class="line">router.afterEach(<span class="function"><span class="params">to</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 路由跳转时出现错误时的拦截器</span></span><br><span class="line">router.onError(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="4-动态路由"><a href="#4-动态路由" class="headerlink" title="4. 动态路由"></a>4. 动态路由</h3><blockquote>
+<p>动态路由一般配合页面级的权限控制使用</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 通过router.addRoutes方法动态添加可访问路由</span></span><br><span class="line">router.addRoutes(addRouters)</span><br><span class="line"><span class="comment">// hack方法 确保addRoutes已完成</span></span><br><span class="line">next(&#123; ...to, <span class="attr">replace</span>: <span class="literal">true</span> &#125;) <span class="comment">// set the replace: true so the navigation will not leave a history record</span></span><br></pre></td></tr></table></figure>
+<h3 id="5-路由加载时动画"><a href="#5-路由加载时动画" class="headerlink" title="5. 路由加载时动画"></a>5. 路由加载时动画</h3><blockquote>
+<p>路由加载时的loading动画一般配合路由懒加载使用</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在状态管理中定义一个路由loading标志</span></span><br><span class="line"><span class="keyword">const</span> app = &#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    routerLoading: <span class="literal">false</span>, <span class="comment">//路由的loading过渡</span></span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    <span class="comment">//修改路由loading状态</span></span><br><span class="line">    UPDATE_ROUTER_LOADING(state, status) &#123;</span><br><span class="line">      state.routerLoading = status</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在路由拦截器中修改loading状态</span></span><br><span class="line">router.beforeEach(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</span><br><span class="line">  store.commit(<span class="string">'UPDATE_ROUTER_LOADING'</span>, <span class="literal">true</span>); <span class="comment">// 展示路由加载时动画</span></span><br><span class="line">&#125;);</span><br><span class="line">router.afterEach(<span class="function"><span class="params">to</span> =&gt;</span> &#123;</span><br><span class="line">  store.commit(<span class="string">'UPDATE_ROUTER_LOADING'</span>, <span class="literal">false</span>);</span><br><span class="line">&#125;);</span><br><span class="line">router.onError(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.error(err); <span class="comment">// for bug</span></span><br><span class="line">  store.commit(<span class="string">'UPDATE_ROUTER_LOADING'</span>, <span class="literal">false</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在router-view定义loading动画</span></span><br><span class="line"><span class="comment">// element-ui提供了v-loading指令可以直接使用</span></span><br><span class="line">&lt;router-view v-loading=<span class="string">"$store.getters.routerLoading"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<h3 id="状态管理"><a href="#状态管理" class="headerlink" title="状态管理"></a>状态管理</h3></blockquote>
+<h3 id="1-小知识"><a href="#1-小知识" class="headerlink" title="1. 小知识"></a>1. 小知识</h3><ul>
+<li>state中的数据修改需要通过mutation或action触发</li>
+<li>mutation中的方法必须是同步函数</li>
+<li>action可包含任意异步操作，可返回一个Promise</li>
+<li>mutation以及action可以重复，调用时将会依次调用，getter必须唯一</li>
+</ul>
+<h3 id="2-多模块"><a href="#2-多模块" class="headerlink" title="2. 多模块"></a>2. 多模块</h3><blockquote>
+<p>业务比较复杂时可使用状态管理中的多模块，有以下注意事项</p>
+</blockquote>
+<ul>
+<li>除state会根据组合时模块的别名来添加层级，其他的都是合并在根级下，所以在回调函数获取的getters、commit、dispatch都是全局作用的</li>
+<li>mutation的回调参数只有state，state为当前模块的状态树，下同</li>
+<li>action的回调参数为state、rootState、getters、commit、dispatch，如果需要在action中调用其他的action可使用dispatch直接调用</li>
+<li>getter的回调参数为state、rootState、getters</li>
+<li>模块间可以通过回调的rootState进行交互</li>
+<li>出现重名的mutation、action将依次触发<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 多模块的实现 app以及user为各个子模块</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">    modules: &#123;</span><br><span class="line">        app,</span><br><span class="line">        user</span><br><span class="line">    &#125;,</span><br><span class="line">    getters</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="3-辅助函数"><a href="#3-辅助函数" class="headerlink" title="3. 辅助函数"></a>3. 辅助函数</h3><blockquote>
+<p>Vuex除了提供了Store对象以外还对外提供了一些辅助函数</p>
+</blockquote>
+<ul>
+<li>mapState、mapGetters将store中的state、getters属性映射到vue组件局部的计算属性中</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; mapState &#125; <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line">computed: mapState([ </span><br><span class="line">    <span class="comment">// 映射 this.name 到 this.$store.state.name </span></span><br><span class="line">    <span class="string">'name'</span></span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; mapGetters &#125; <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line">computed: &#123;</span><br><span class="line">    <span class="comment">// 映射 this.name 到 this.$store.getters.name </span></span><br><span class="line">    ...mapGetters([ <span class="string">'name'</span> ])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>mapActions、mapMutations将store中的dispatch、commit方法映射到vue组件局部的方法中</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; mapActions &#125; <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"></span><br><span class="line">methods: &#123; </span><br><span class="line">    <span class="comment">// 映射 this.LoginByUsername() 到 this.$store.dispatch('LoginByUsername')</span></span><br><span class="line">    ...mapActions([ <span class="string">'LoginByUsername'</span> ]), </span><br><span class="line">    <span class="comment">// 映射 this.login() to this.$store.dispatch('LoginByUsername')</span></span><br><span class="line">    ...mapActions(&#123; <span class="attr">login</span>: <span class="string">'LoginByUsername'</span>&#125;) </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; mapMutations &#125; <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"></span><br><span class="line">methods: &#123; </span><br><span class="line">    <span class="comment">// 映射 this.SET_NAME() 到 this.$store.commit('SET_NAME') ])</span></span><br><span class="line">    ...mapMutations([ <span class="string">'SET_NAME'</span> ]) , </span><br><span class="line">    <span class="comment">// 映射 this.setName() 到 this.$store.commit('SET_NAME') &#125;)</span></span><br><span class="line">    ...mapMutations(&#123; <span class="attr">setName</span>: <span class="string">'SET_NAME'</span> ])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-数据持久化插件"><a href="#4-数据持久化插件" class="headerlink" title="4. 数据持久化插件"></a>4. 数据持久化插件</h3><blockquote>
+<p>刷新页面时希望状态不被丢失时可用此插件</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 摘抄于 https://github.com/robinvdvleuten/vuex-persistedstate</span></span><br><span class="line"><span class="keyword">import</span> createPersistedState <span class="keyword">from</span> <span class="string">'vuex-persistedstate'</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> Cookies <span class="keyword">from</span> <span class="string">'js-cookie'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Store(&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  plugins: [</span><br><span class="line">    createPersistedState(&#123;</span><br><span class="line">      storage: &#123;</span><br><span class="line">        getItem: key =* Cookies.get(key),</span><br><span class="line">        <span class="comment">// Please see https://github.com/js-cookie/js-cookie#json, on how to handle JSON.</span></span><br><span class="line">        setItem: (key, value) =* Cookies.set(key, value, &#123; <span class="attr">expires</span>: <span class="number">3</span>, <span class="attr">secure</span>: <span class="literal">true</span> &#125;),</span><br><span class="line">        removeItem: key =* Cookies.remove(key)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="5-日志插件"><a href="#5-日志插件" class="headerlink" title="5. 日志插件"></a>5. 日志插件</h3><blockquote>
+<p>开发环境中希望能够跟踪状态变化并输出时可用此插件</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// createLogger是vuex中的内置插件</span></span><br><span class="line"><span class="keyword">import</span> createLogger <span class="keyword">from</span> <span class="string">'vuex/dist/logger'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> vuexPlugins = [];</span><br><span class="line"><span class="keyword">if</span>(process.env.NODE_ENV !== <span class="string">'production'</span>)&#123; <span class="comment">// 开发环境加载该插件</span></span><br><span class="line">    vuexPlugins.push(createLogger); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Store(&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  plugins: vuexPlugins</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<h3 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h3></blockquote>
+<h3 id="1-需要实现的功能"><a href="#1-需要实现的功能" class="headerlink" title="1. 需要实现的功能"></a>1. 需要实现的功能</h3><ul>
+<li>根据用户登录后的权限表生成路由</li>
+<li>页面级的权限控制</li>
+<li>dom元素级的权限控制</li>
+<li>登录状态失效的处理</li>
+</ul>
+<h3 id="2-路由设计"><a href="#2-路由设计" class="headerlink" title="2. 路由设计"></a>2. 路由设计</h3><blockquote>
+<p>首先我们需要设计路由对象需要有哪些必要参数信息</p>
+<p>为了实现权限管理我们必须要有roles参数代表该路由必须拥有哪些权限才能访问</p>
+<p>为了更好的展示路由在这里设计了title、icon两个参数用于侧边栏的菜单展示</p>
+<p>而有些路由不需要在侧边栏展示，这里使用hidden参数来告诉程序哪些路由是不需要展示的</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 首先设计路由对象参数</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* hidden: true                   如果hidden为true则在左侧菜单栏展示，默认为false</span></span><br><span class="line"><span class="comment">* name:'router-name'             路由名称，路由唯一标识</span></span><br><span class="line"><span class="comment">* meta : &#123;</span></span><br><span class="line"><span class="comment">    roles: ['admin','editor']    权限列表，用于页面级的权限控制，默认不设置代表任何权限均可访问</span></span><br><span class="line"><span class="comment">    title: 'title'               对应路由在左侧菜单栏的标题名称</span></span><br><span class="line"><span class="comment">    icon: 'icon-class'           对应路由在左侧菜单栏的图标样式</span></span><br><span class="line"><span class="comment"> &#125;</span></span><br><span class="line"><span class="comment">**/</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>接下来我们需要实现路由的动态加载</p>
+<p>系统初始化时加载必要路由，之后根据登录用户的权限加载符合条件的路由</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义系统初始化时加载的必要路由信息</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> constantRouterMap = [</span><br><span class="line">  &#123; <span class="attr">path</span>: <span class="string">'/login'</span>, <span class="attr">name</span>: <span class="string">'login'</span>, <span class="attr">meta</span>: &#123; <span class="attr">title</span>: <span class="string">"系统登录"</span>, <span class="attr">hidden</span>: <span class="literal">true</span> &#125;, <span class="attr">component</span>: login &#125;,</span><br><span class="line">  &#123; <span class="attr">path</span>: <span class="string">"/404"</span>, <span class="attr">name</span>: <span class="string">"page404"</span>, <span class="attr">meta</span>: &#123; <span class="attr">title</span>: <span class="string">"页面走丢了"</span>, <span class="attr">hidden</span>: <span class="literal">true</span> &#125;, <span class="attr">component</span>: page404 &#125;,</span><br><span class="line">  &#123; <span class="attr">path</span>: <span class="string">"/401"</span>, <span class="attr">name</span>: <span class="string">"page401"</span>, <span class="attr">meta</span>: &#123; <span class="attr">title</span>: <span class="string">"权限不足"</span>, <span class="attr">hidden</span>: <span class="literal">true</span> &#125;, <span class="attr">component</span>: page401 &#125;</span><br><span class="line">]</span><br><span class="line"><span class="comment">// 定义布局页面</span></span><br><span class="line"><span class="keyword">const</span> layout = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="comment">/* webpackChunkName: "group-index" */</span> <span class="string">'@/views/layout'</span>);</span><br><span class="line"><span class="comment">// 定义异步加载的路由信息</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> asyncRouterMap = [</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">'/'</span>,</span><br><span class="line">    name: <span class="string">'main'</span>,</span><br><span class="line">    redirect: <span class="string">'/dashboard'</span>,</span><br><span class="line">    hidden: <span class="literal">true</span>,</span><br><span class="line">    component: layout,</span><br><span class="line">    children: [</span><br><span class="line">      &#123; <span class="attr">path</span>: <span class="string">'dashboard'</span>, <span class="attr">name</span>: <span class="string">'dashboard'</span>, <span class="attr">meta</span>: &#123; <span class="attr">title</span>: <span class="string">"仪表盘"</span> &#125;, <span class="attr">component</span>: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="comment">/* webpackChunkName: "group-index" */</span><span class="string">'@/views/dashboard'</span>) &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">'/permission'</span>,</span><br><span class="line">    name: <span class="string">'permission'</span>,</span><br><span class="line">    meta: &#123; <span class="attr">title</span>: <span class="string">"权限页"</span>, <span class="attr">icon</span>: <span class="string">"dbm d-icon-quanxian"</span> &#125;,</span><br><span class="line">    redirect: <span class="string">'/permission/adminpermission'</span>,</span><br><span class="line">    component: layout,</span><br><span class="line">    children: [</span><br><span class="line">      &#123; <span class="attr">path</span>: <span class="string">"adminpermission"</span>, <span class="attr">name</span>: <span class="string">"adminPermission"</span>, <span class="attr">meta</span>: &#123; <span class="attr">title</span>: <span class="string">"管理员权限页"</span>, <span class="attr">roles</span>: [<span class="string">"admin"</span>] &#125;, <span class="attr">component</span>: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/views/permission/admin'</span>) &#125;,</span><br><span class="line">      &#123; <span class="attr">path</span>: <span class="string">"watcherpermission"</span>, <span class="attr">name</span>: <span class="string">"watcherPermission"</span>, <span class="attr">meta</span>: &#123; <span class="attr">title</span>: <span class="string">"游客权限页"</span>, <span class="attr">roles</span>: [<span class="string">"admin"</span>, <span class="string">"watcher"</span>] &#125;, <span class="attr">component</span>: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/views/permission/watcher'</span>) &#125;,</span><br><span class="line">      &#123; <span class="attr">path</span>: <span class="string">"elementpermission"</span>, <span class="attr">name</span>: <span class="string">"elementPermission"</span>, <span class="attr">meta</span>: &#123; <span class="attr">title</span>: <span class="string">"元素级别权限"</span> &#125;, <span class="attr">component</span>: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/views/permission/element'</span>) &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123; <span class="attr">path</span>: <span class="string">'*'</span>, <span class="attr">redirect</span>: <span class="string">'/404'</span>, <span class="attr">hidden</span>: <span class="literal">true</span> &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h3 id="3-页面级的权限控制"><a href="#3-页面级的权限控制" class="headerlink" title="3. 页面级的权限控制"></a>3. 页面级的权限控制</h3><blockquote>
+<p>使用路由拦截来实现页面级的权限控制</p>
+<p>拦截路由跳转判断用户是否登录</p>
+<p>从拉取的用户信息中提取权限表通过addRoutes方法动态加载异步路由表</p>
+<p>每次路由跳转时判断用户是否拥有该路由的访问权限实现动态权限匹配</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义免登白名单</span></span><br><span class="line"><span class="keyword">const</span> whiteList = [<span class="string">'/login'</span>, <span class="string">'/404'</span>, <span class="string">'/401'</span>];</span><br><span class="line"><span class="comment">// 拦截路由跳转</span></span><br><span class="line">router.beforeEach(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</span><br><span class="line">  store.commit(<span class="string">'UPDATE_ROUTER_LOADING'</span>, <span class="literal">true</span>); <span class="comment">// 展示路由加载时动画</span></span><br><span class="line">  <span class="keyword">if</span> (getToken()) &#123;  <span class="comment">// 存在token</span></span><br><span class="line">    <span class="keyword">if</span> (to.path === <span class="string">'/login'</span>) &#123;</span><br><span class="line">      next(&#123; <span class="attr">path</span>: <span class="string">'/'</span> &#125;)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (store.getters.roles.length === <span class="number">0</span>) &#123; <span class="comment">// 判断当前用户是否已拉取完用户信息</span></span><br><span class="line">        store.dispatch(<span class="string">'GetUserInfo'</span>).then(<span class="function"><span class="params">data</span> =&gt;</span> &#123; <span class="comment">// 拉取用户信息</span></span><br><span class="line">          <span class="keyword">const</span> roles = data.roles <span class="comment">// 权限表必须为数组,例如: ['admin','editer']</span></span><br><span class="line">          store.dispatch(<span class="string">'GenerateRoutes'</span>, &#123; roles &#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="comment">// 根据roles权限生成可访问的路由表</span></span><br><span class="line">            router.addRoutes(store.getters.addRouters) <span class="comment">// 动态添加可访问路由表</span></span><br><span class="line">            next(&#123; ...to, <span class="attr">replace</span>: <span class="literal">true</span> &#125;) <span class="comment">// hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record</span></span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123; <span class="comment">// 拉取用户信息失败，提示登录状态失效</span></span><br><span class="line">          store.dispatch(<span class="string">'FedLogOut'</span>).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            Message.error(<span class="string">'登录状态失效, 请重新登录'</span>);</span><br><span class="line">            next(&#123; <span class="attr">path</span>: <span class="string">'/login'</span> &#125;);</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (hasPermission(store.getters.roles, to.meta.roles)) &#123; <span class="comment">// 动态权限匹配</span></span><br><span class="line">          next();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          next(&#123; <span class="attr">path</span>: <span class="string">'/401'</span>, <span class="attr">replace</span>: <span class="literal">true</span>, <span class="attr">query</span>: &#123; <span class="attr">noGoBack</span>: <span class="literal">true</span> &#125; &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123; <span class="comment">// 没有token</span></span><br><span class="line">    <span class="keyword">if</span> (whiteList.indexOf(to.path) !== <span class="number">-1</span>) &#123; <span class="comment">// 在免登录白名单，直接进入</span></span><br><span class="line">      next();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      next(<span class="string">'/login'</span>); <span class="comment">// 否则全部重定向到登录页</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="4-元素级的权限控制"><a href="#4-元素级的权限控制" class="headerlink" title="4. 元素级的权限控制"></a>4. 元素级的权限控制</h3><blockquote>
+<p>使用自定义指令来实现元素级的权限控制</p>
+<p>在被绑定元素插入父节点时验证用户是否包含该元素的所需权限</p>
+<p>根据鉴权结果来决定是否移除该元素</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">'@/store'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  inserted(el, binding, vnode) &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; value &#125; = binding; <span class="comment">// 获取自定义指令传入的鉴权信息</span></span><br><span class="line">    <span class="keyword">const</span> roles = store.getters &amp;&amp; store.getters.roles; <span class="comment">// 从状态管理中获取当前用户的路由信息</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (value &amp;&amp; value <span class="keyword">instanceof</span> <span class="built_in">Array</span> &amp;&amp; value.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> permissionRoles = value;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> hasPermission = roles.some(<span class="function"><span class="params">role</span> =&gt;</span> &#123; <span class="comment">// 判断用户是否包含该元素所需权限</span></span><br><span class="line">        <span class="keyword">return</span> permissionRoles.includes(role);</span><br><span class="line">      &#125;)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (!hasPermission) &#123; <span class="comment">// 权限不足</span></span><br><span class="line">        el.parentNode &amp;&amp; el.parentNode.removeChild(el); <span class="comment">// 移除该dom元素</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">`必须要有权限写入，例如['admin']`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在vue组件上使用它</span></span><br><span class="line"><span class="comment">// 引入并注册permission指令</span></span><br><span class="line"><span class="keyword">import</span> permission <span class="keyword">from</span> <span class="string">"@/directive/permission/index.js"</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  directives: &#123;</span><br><span class="line">    permission</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 使用permission指令</span></span><br><span class="line">&lt;el-button v-permission=<span class="string">"['admin']"</span>&gt;admin 可见&lt;<span class="regexp">/el-button&gt;</span></span><br><span class="line"><span class="regexp">&lt;el-button v-permission="['admin','watcher']"&gt;watcher 可见&lt;/</span>el-button&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<h3 id="render函数"><a href="#render函数" class="headerlink" title="render函数"></a>render函数</h3></blockquote>
+<h3 id="1-如何封装一个支持render渲染的组件"><a href="#1-如何封装一个支持render渲染的组件" class="headerlink" title="1. 如何封装一个支持render渲染的组件"></a>1. 如何封装一个支持render渲染的组件</h3><ul>
+<li>首先创建一个函数式组件</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 表格拓展函数式组件的实现</span></span><br><span class="line"><span class="comment">// see https://github.com/calebman/vue-DBM/blob/master/src/components/table/expand.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'TableExpand'</span>,</span><br><span class="line">  functional: <span class="literal">true</span>, <span class="comment">// 标记组件为 functional，这意味它是无状态 (没有响应式数据)，无实例 (没有 this 上下文)。</span></span><br><span class="line">  props: &#123;</span><br><span class="line">    row: <span class="built_in">Object</span>, <span class="comment">// 当前行对象</span></span><br><span class="line">    field: <span class="built_in">String</span>, <span class="comment">// 列名称</span></span><br><span class="line">    index: <span class="built_in">Number</span>, <span class="comment">// 行号</span></span><br><span class="line">    render: <span class="built_in">Function</span> <span class="comment">// 渲染函数</span></span><br><span class="line">  &#125;,</span><br><span class="line">  render: <span class="function">(<span class="params">h, ctx</span>) =&gt;</span> &#123; <span class="comment">// 提供ctx作为上下文</span></span><br><span class="line">    <span class="keyword">const</span> params = &#123;</span><br><span class="line">      row: ctx.props.row,</span><br><span class="line">      field: ctx.props.field,</span><br><span class="line">      index: ctx.props.index</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> ctx.props.render(h, params);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在父组件中引入</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// see https://github.com/calebman/vue-DBM/blob/master/src/components/table/table.vue</span></span><br><span class="line"><span class="keyword">import</span> expand <span class="keyword">from</span> <span class="string">"./expand.js"</span>;</span><br><span class="line"></span><br><span class="line">&lt;span v-<span class="keyword">if</span>=<span class="string">"typeof col.render ==='function'"</span>&gt;</span><br><span class="line">   &lt;expand :field=<span class="string">"col.field"</span> :row=<span class="string">"item"</span> :render=<span class="string">"col.render"</span> :index=<span class="string">"rowIndex"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">expand</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/span&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用render函数渲染</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// see https://github.com/calebman/vue-DBM/blob/master/src/views/demo/datatable/data-table.vue</span></span><br><span class="line"><span class="comment">// 引入自定义组件</span></span><br><span class="line"><span class="keyword">import</span> IndexColumn <span class="keyword">from</span> <span class="string">"@/components/business/index-column.vue"</span>;</span><br><span class="line"><span class="comment">// 注册</span></span><br><span class="line">components: &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  IndexColumn</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line"><span class="comment">// 获取当前组件的上下文</span></span><br><span class="line"><span class="keyword">let</span> self = <span class="keyword">this</span>;</span><br><span class="line"><span class="comment">// 定义渲染函数</span></span><br><span class="line">render: <span class="function">(<span class="params">h, params</span>) =&gt;</span></span><br><span class="line">  h(<span class="string">"div"</span>, [</span><br><span class="line">    h(IndexColumn, &#123;</span><br><span class="line">      props: &#123;</span><br><span class="line">        field: params.field,</span><br><span class="line">        index: params.index,</span><br><span class="line">        pagingIndex:</span><br><span class="line">          (self.pagination.pageCurrent - <span class="number">1</span>) * self.pagination.pageSize</span><br><span class="line">      &#125;,</span><br><span class="line">      on: &#123; <span class="string">"on-value-delete"</span>: self.deleteRow &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  ])</span><br></pre></td></tr></table></figure>
+<blockquote>
+<h3 id="混入"><a href="#混入" class="headerlink" title="混入"></a>混入</h3></blockquote>
+<h3 id="1-小知识-1"><a href="#1-小知识-1" class="headerlink" title="1. 小知识"></a>1. 小知识</h3><ul>
+<li>混入对象将享有被混入组件的生命周期</li>
+<li>数据对象混入冲突时将以组件数据优先</li>
+<li>对象选项（如methods、components、directives）混入冲突时取组件对象的键值对</li>
+<li>同名钩子混合为数组，混入对象的钩子将在组件自身钩子之前调用</li>
+</ul>
+<h3 id="2-应用场景"><a href="#2-应用场景" class="headerlink" title="2. 应用场景"></a>2. 应用场景</h3><ul>
+<li>希望部分路由页面在离开时销毁但是不希望每个路由页面都定义局部路由时</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义混入对象</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  beforeRouteLeave(to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">    <span class="keyword">if</span> (to.meta &amp;&amp; to.meta.destroy) &#123;</span><br><span class="line">      <span class="keyword">this</span>.$destroy();</span><br><span class="line">    &#125;</span><br><span class="line">    next();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 混入需要此功能的组件页面</span></span><br><span class="line"><span class="keyword">import</span> routeLeaveDestoryMixin <span class="keyword">from</span> <span class="string">"routeleave-destory-mixin"</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  mixins: [routeLeaveDestoryMixin]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>数据表格自定义了文本、数字、时间以及文件单元格组件，每个组件都有同样的数据修改、焦点选中等方法时，可提取为混入对象，提高组件复用性</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// see https://github.com/calebman/vue-DBM/blob/master/src/components/business/render-column-mixin.js</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义混入对象</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  computed: &#123;</span><br><span class="line">    <span class="comment">// 是否选中此单元格</span></span><br><span class="line">    inSelect() &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.cellClickData.index == <span class="keyword">this</span>.index &amp;&amp;</span><br><span class="line">        <span class="keyword">this</span>.cellClickData.field == <span class="keyword">this</span>.field) &#123;</span><br><span class="line">        <span class="keyword">this</span>.focus();</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    <span class="comment">// 获取焦点</span></span><br><span class="line">    focus() &#123;</span><br><span class="line">      <span class="keyword">let</span> self = <span class="keyword">this</span>;</span><br><span class="line">      setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (self.$refs[<span class="string">"rendercolumn"</span>]) &#123;</span><br><span class="line">          self.$refs[<span class="string">"rendercolumn"</span>].focus();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;, <span class="number">100</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 失去焦点</span></span><br><span class="line">    blur() &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.v != <span class="keyword">this</span>.value) &#123;</span><br><span class="line">        <span class="keyword">this</span>.$emit(<span class="string">"on-value-change"</span>, <span class="keyword">this</span>.field, <span class="keyword">this</span>.index, <span class="keyword">this</span>.v);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">this</span>.$emit(<span class="string">"on-value-cancel"</span>, <span class="keyword">this</span>.field, <span class="keyword">this</span>.index);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 数据修改</span></span><br><span class="line">    changeValue(val) &#123;</span><br><span class="line">      <span class="keyword">this</span>.$emit(<span class="string">"on-value-change"</span>, <span class="keyword">this</span>.field, <span class="keyword">this</span>.index, val);</span><br><span class="line">      <span class="keyword">this</span>.$emit(<span class="string">"on-value-cancel"</span>, <span class="keyword">this</span>.field, <span class="keyword">this</span>.index);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  watch: &#123;</span><br><span class="line">    <span class="comment">// 监听父组件数据变化</span></span><br><span class="line">    value(val) &#123;</span><br><span class="line">      <span class="keyword">this</span>.v = val;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 文本列</span></span><br><span class="line"><span class="comment">// see https://github.com/calebman/vue-DBM/blob/master/src/components/business/text-column.vue</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;input v-show=<span class="string">"inSelect"</span> ref=<span class="string">"rendercolumn"</span> @blur=<span class="string">"blur"</span> @keyup=<span class="string">"enter($event)"</span> v-model=<span class="string">"v"</span> /&gt;</span><br><span class="line">    &lt;span v-show=<span class="string">"!inSelect"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"cell-text"</span>&gt;&#123;&#123;v&#125;&#125;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 时间列</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ see https:/</span><span class="regexp">/github.com/</span>calebman/vue-DBM/blob/master/src/components/business/datetime-column.vue</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;el-date-picker v-show=<span class="string">"inSelect"</span> ref=<span class="string">"rendercolumn"</span> v-model=<span class="string">"v"</span> type=<span class="string">"datetime"</span> @change=<span class="string">"changeValue"</span> @blur=<span class="string">"blur"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">el-date-picker</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-show</span>=<span class="string">"!inSelect"</span>&gt;</span>&#123;&#123;coverValue&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>希望降低组件的复杂度的时候可使用多个混入组件来分割核心组件的功能</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># see https://github.com/calebman/vue-DBM/tree/master/src/components/table</span></span><br><span class="line">├─table</span><br><span class="line">│      cell-edit-mixin.js                      <span class="comment"># 单元格编辑</span></span><br><span class="line">│      classes-mixin.js                        <span class="comment"># 表格样式                     </span></span><br><span class="line">│      scroll-bar-control-mixin.js             <span class="comment"># 表格滚动</span></span><br><span class="line">│      table-empty-mixin.js                    <span class="comment"># 无数据时的处理</span></span><br><span class="line">│      table-resize-mixin.js                   <span class="comment"># 表格的自适应</span></span><br><span class="line">│      table-row-mouse-events-mixin.js         <span class="comment"># 鼠标移动时的样式改变</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<h3 id="数据模拟"><a href="#数据模拟" class="headerlink" title="数据模拟"></a>数据模拟</h3></blockquote>
+<h3 id="1-需要实现的功能-1"><a href="#1-需要实现的功能-1" class="headerlink" title="1. 需要实现的功能"></a>1. 需要实现的功能</h3><ul>
+<li>拦截Ajax请求并延时响应</li>
+<li>返回的统一的数据格式</li>
+<li>响应不同的模拟数据</li>
+</ul>
+<h3 id="2-配置Mockjs拦截Ajax请求"><a href="#2-配置Mockjs拦截Ajax请求" class="headerlink" title="2. 配置Mockjs拦截Ajax请求"></a>2. 配置Mockjs拦截Ajax请求</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// see https://github.com/calebman/vue-DBM/blob/master/src/mock/index.js</span></span><br><span class="line"><span class="comment">// 引入Mockjs</span></span><br><span class="line"><span class="keyword">import</span> Mock <span class="keyword">from</span> <span class="string">'mockjs'</span>;</span><br><span class="line"><span class="comment">// 配置延时</span></span><br><span class="line">Mock.setup(&#123;</span><br><span class="line">  timeout: <span class="string">'300-1000'</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 配置拦截</span></span><br><span class="line">Mock.mock(<span class="regexp">/\/user\/login/</span>, <span class="string">'post'</span>, loginAPI.loginByUsername);</span><br><span class="line">Mock.mock(<span class="regexp">/\/user\/logout/</span>, <span class="string">'post'</span>, loginAPI.logout);</span><br><span class="line">Mock.mock(<span class="regexp">/\/user\/info\.*/</span>, <span class="string">'get'</span>, loginAPI.getUserInfo);</span><br></pre></td></tr></table></figure>
+<h3 id="3-响应的统一数据格式"><a href="#3-响应的统一数据格式" class="headerlink" title="3. 响应的统一数据格式"></a>3. 响应的统一数据格式</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// see https://github.com/calebman/vue-DBM/blob/master/src/mock/response.js</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 统一响应工具类</span></span><br><span class="line"><span class="comment"> * 响应统一格式的数据</span></span><br><span class="line"><span class="comment"> * response : &#123;</span></span><br><span class="line"><span class="comment"> *    errCode: 00             响应结果码</span></span><br><span class="line"><span class="comment"> *    errMsg: 0000000（成功）  响应详细结果码</span></span><br><span class="line"><span class="comment"> *    data: null              具体数据</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="comment">// 成功</span></span><br><span class="line">  success: <span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      errCode: <span class="string">'00'</span>,</span><br><span class="line">      errMsg: <span class="string">'0000000（成功）'</span>,</span><br><span class="line">      data: data ? data : <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 失败</span></span><br><span class="line">  fail: <span class="function">(<span class="params">errCode, errMsg</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      errCode: errCode ? errCode : <span class="string">'04'</span>,</span><br><span class="line">      errMsg: errMsg ? errMsg : <span class="string">'0401001（未知错误）'</span>,</span><br><span class="line">      data: <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 权限不足</span></span><br><span class="line">  unauthorized: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      errCode: <span class="string">'43'</span>,</span><br><span class="line">      errMsg: <span class="string">'4300001（无权访问）'</span>,</span><br><span class="line">      data: <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-配置响应逻辑"><a href="#4-配置响应逻辑" class="headerlink" title="4. 配置响应逻辑"></a>4. 配置响应逻辑</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// see https://github.com/calebman/vue-DBM/blob/master/src/mock/login.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; param2Obj &#125; <span class="keyword">from</span> <span class="string">'@/utils'</span>;</span><br><span class="line"><span class="keyword">import</span> Response <span class="keyword">from</span> <span class="string">'./response'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> userMap = &#123;</span><br><span class="line">  admin: &#123;</span><br><span class="line">    password: <span class="string">'admin'</span>,</span><br><span class="line">    roles: [<span class="string">'admin'</span>],</span><br><span class="line">    token: <span class="string">'admin'</span>,</span><br><span class="line">    introduction: <span class="string">'我是超级管理员'</span>,</span><br><span class="line">    avatar: <span class="string">'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif'</span>,</span><br><span class="line">    name: <span class="string">'Super Admin'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  watcher: &#123;</span><br><span class="line">    password: <span class="string">'watcher'</span>,</span><br><span class="line">    roles: [<span class="string">'watcher'</span>],</span><br><span class="line">    token: <span class="string">'watcher'</span>,</span><br><span class="line">    introduction: <span class="string">'我是游客'</span>,</span><br><span class="line">    avatar: <span class="string">'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif'</span>,</span><br><span class="line">    name: <span class="string">'Normal Watcher'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="comment">// 使用用户名登录</span></span><br><span class="line">  loginByUsername: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; username, password &#125; = <span class="built_in">JSON</span>.parse(config.body);</span><br><span class="line">    <span class="keyword">if</span> (userMap[username] &amp;&amp; userMap[username].password === password) &#123;</span><br><span class="line">      <span class="keyword">return</span> Response.success(userMap[username]);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> Response.fail(<span class="string">"01"</span>, <span class="string">"0101001（用户名或密码错误）"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 拉取用户信息</span></span><br><span class="line">  getUserInfo: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; token &#125; = param2Obj(config.url);</span><br><span class="line">    <span class="keyword">if</span> (userMap[token]) &#123;</span><br><span class="line">      <span class="keyword">return</span> Response.success(userMap[token]);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> Response.fail();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 注销</span></span><br><span class="line">  logout: <span class="function"><span class="params">()</span> =&gt;</span> Response.success()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-模拟随机数据"><a href="#5-模拟随机数据" class="headerlink" title="5. 模拟随机数据"></a>5. 模拟随机数据</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// see https://github.com/nuysoft/Mock/wiki</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Mock <span class="keyword">from</span> <span class="string">'mockjs'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 随机字符串</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mockStr</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> result = Mock.mock(&#123; <span class="string">'str'</span>: <span class="string">'@name'</span> &#125;);</span><br><span class="line">    <span class="keyword">return</span> result.str;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 随机数字</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mockNumber</span>(<span class="params">min, max</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> key = <span class="string">'num|'</span> + min + <span class="string">'-'</span> + max;</span><br><span class="line">    <span class="keyword">let</span> param = &#123;&#125;</span><br><span class="line">    param[key] = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">return</span> Mock.mock(param).num;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 随机小数，最高小数点后三位</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mockDecimal</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Mock.Random.float(<span class="number">1</span>, <span class="number">100</span>, <span class="number">1</span>, <span class="number">3</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 随机数组一项</span></span><br><span class="line"><span class="keyword">const</span> arr = [<span class="string">"image2.jpeg"</span>, <span class="string">"image3.jpeg"</span>, <span class="string">"image4.jpeg"</span>, <span class="string">"image5.jpeg"</span>, <span class="string">"image6.jpeg"</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mockOneFileAddress</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Mock.mock(&#123; <span class="string">'oneFile|1'</span>: arr &#125;).oneFile;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 随机日期</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mockDate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> mockDateStr = Mock.Random.datetime(<span class="string">'yyyy-MM-dd HH:mm:ss'</span>);</span><br><span class="line">    <span class="comment">// 在这里使用了momentjs将其解析为Date类型</span></span><br><span class="line">    <span class="keyword">let</span> mockDate = moment(mockDateStr, <span class="string">'YYYY-MM-DD HH:mm:ss'</span>).toDate();</span><br><span class="line">    <span class="keyword">return</span> mockDate;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<h3 id="打包优化"><a href="#打包优化" class="headerlink" title="打包优化"></a>打包优化</h3></blockquote>
+<h3 id="1-做哪部分的优化"><a href="#1-做哪部分的优化" class="headerlink" title="1. 做哪部分的优化"></a>1. 做哪部分的优化</h3><ul>
+<li>cdn优化</li>
+<li>路由懒加载</li>
+<li>其他优化</li>
+<li>用户体验</li>
+</ul>
+<h3 id="2-cdn优化"><a href="#2-cdn优化" class="headerlink" title="2. cdn优化"></a>2. cdn优化</h3><blockquote>
+<p>类似于vue、vue-router、moment、element-ui等提供了cdn的架或者工具类可在index.html中直接引入，然后配置webpack的externals使其不加入打包配置，从而减小app.js、vendor.js的体积</p>
+</blockquote>
+<ul>
+<li>在index.html使用cdn引入依赖库</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 网络请求工具类 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/axios/0.18.0/axios.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- vue --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/vue/2.5.16/vue.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- vue-router --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/vue-router/3.0.1/vue-router.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- vuex --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/vuex/3.0.1/vuex.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- momentjs的中文包 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/moment.js/2.22.1/moment-with-locales.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- momentjs --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/moment.js/2.22.1/locale/zh-cn.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- element-ui样式 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/element-ui/2.3.6/theme-default/index.css"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- element-ui --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/element-ui/2.3.6/index.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>配置build文件夹下webpack.base.conf.js文件</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  externals: &#123;</span><br><span class="line">    <span class="string">'axios'</span>: <span class="string">'axios'</span>,</span><br><span class="line">    <span class="string">'vue'</span>: <span class="string">'Vue'</span>,</span><br><span class="line">    <span class="string">'vue-router'</span>: <span class="string">'VueRouter'</span>,</span><br><span class="line">    <span class="string">'vuex'</span>: <span class="string">'Vuex'</span>,</span><br><span class="line">    <span class="string">'moment'</span>: <span class="string">'moment'</span>,</span><br><span class="line">    <span class="string">'element-ui'</span>: <span class="string">'ELEMENT'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-路由懒加载"><a href="#3-路由懒加载" class="headerlink" title="3. 路由懒加载"></a>3. 路由懒加载</h3><blockquote>
+<p>路由懒加载能够将代码根据路由配置进行分割，加快首屏渲染的速度，在大型的单页应用中是必不可少的</p>
+<p>参见<a href="https://github.com/calebman/vue-DBM/blob/master/docs/router.md" target="_blank" rel="noopener">路由管理</a>的实现</p>
+</blockquote>
+<h3 id="5-其他优化"><a href="#5-其他优化" class="headerlink" title="5. 其他优化"></a>5. 其他优化</h3><ul>
+<li>尽量少的注册全局组件，使用UI框架可以参考文档做按需加载</li>
+<li>可以和服务端配合采用gzip压缩，减少传输耗时</li>
+<li>在更新不是很频繁的应用可考虑提高缓存时间</li>
+<li>例如moment、lodash这种庞大的工具库在使用的功能不多的情况下可考虑寻找替代品</li>
+</ul>
+<h3 id="6-用户体验"><a href="#6-用户体验" class="headerlink" title="6. 用户体验"></a>6. 用户体验</h3><blockquote>
+<p>一个单页应用到了一定规模不管怎么优化首屏渲染还是一个比较慢的过程，此时可以考虑在首屏渲染时使用一个加载动画告诉用户系统正在初始化</p>
+</blockquote>
+<ul>
+<li>首先在index.html中定义一个渲染动画</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 首屏渲染时的加载动画 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"system-loading"</span> <span class="attr">class</span>=<span class="string">"showbox"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"loader"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">svg</span> <span class="attr">class</span>=<span class="string">"circular"</span> <span class="attr">viewBox</span>=<span class="string">"25 25 50 50"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">circle</span> <span class="attr">class</span>=<span class="string">"path"</span> <span class="attr">cx</span>=<span class="string">"50"</span> <span class="attr">cy</span>=<span class="string">"50"</span> <span class="attr">r</span>=<span class="string">"20"</span> <span class="attr">fill</span>=<span class="string">"none"</span> <span class="attr">stroke-width</span>=<span class="string">"2"</span> <span class="attr">stroke-miterlimit</span>=<span class="string">"10"</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">span</span>&gt;</span>系统初始化中...<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- built files will be auto injected --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>然后在App.vue组件的mounted钩子中移除这个loading</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  mounted() &#123;</span><br><span class="line">    <span class="built_in">document</span>.body.removeChild(<span class="built_in">document</span>.getElementById(<span class="string">"system-loading"</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+	
+	<div>
+      
+        
+<div>
+	<ul class="post-copyright">
+	  <li class="post-copyright-author">
+		<strong>本文作者： </strong>
+		<a href="/" title="访问 Jianhui Chen 的个人博客">Jianhui Chen</a>
+	  </li>
+	  <li class="post-copyright-link">
+		<strong>本文链接：</strong>
+		<a href="/2018-05-18-vue-notes/" title="纯正后端的vue轮子笔记">https://chenjianhui.site/2018-05-18-vue-notes/</a>
+	  </li>
+	  <li class="post-copyright-license">
+		<strong>版权声明： </strong>
+		<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+	  </li>
+	</ul>
+</div>
+
+      
+	</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vuejs/" rel="tag"># vuejs</a>
+          
+            <a href="/tags/vue-router/" rel="tag"># vue-router</a>
+          
+            <a href="/tags/vuex/" rel="tag"># vuex</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018-02-21-build-springboot-env/" rel="next" title="SpringBoot集成环境搭建">
+                <i class="fa fa-chevron-left"></i> SpringBoot集成环境搭建
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018-05-23-build-http-server-with-netty/" rel="prev" title="使用Netty构建Http容器">
+                使用Netty构建Http容器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="gitalk-container"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Jianhui Chen">
+          <p class="site-author-name" itemprop="name">Jianhui Chen</p>
+           
+              <p class="site-description motion-element" itemprop="description">Full of soul, independent personality</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/calebman" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://juejin.im/user/59bc7c00f265da0644289a4b" target="_blank" title="掘金">
+                  
+                    <i class="fa fa-fw fa-tree"></i>
+                  
+                    
+                      掘金
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-link"></i>
+              推荐阅读
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.importnew.com/18633.html" title="Java HashMap工作原理及实现" target="_blank">Java HashMap工作原理及实现</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cs.usfca.edu/~galles/visualization/RedBlack.html" title="红黑树的原理在线示例" target="_blank">红黑树的原理在线示例</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进入烂笔头模式"><span class="nav-number">2.</span> <span class="nav-text">进入烂笔头模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#路由"><span class="nav-number">2.1.</span> <span class="nav-text">路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-路由加载"><span class="nav-number">2.2.</span> <span class="nav-text">1. 路由加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-404路由"><span class="nav-number">2.3.</span> <span class="nav-text">2. 404路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-路由拦截"><span class="nav-number">2.4.</span> <span class="nav-text">3. 路由拦截</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-动态路由"><span class="nav-number">2.5.</span> <span class="nav-text">4. 动态路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-路由加载时动画"><span class="nav-number">2.6.</span> <span class="nav-text">5. 路由加载时动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态管理"><span class="nav-number">2.7.</span> <span class="nav-text">状态管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-小知识"><span class="nav-number">2.8.</span> <span class="nav-text">1. 小知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-多模块"><span class="nav-number">2.9.</span> <span class="nav-text">2. 多模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-辅助函数"><span class="nav-number">2.10.</span> <span class="nav-text">3. 辅助函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-数据持久化插件"><span class="nav-number">2.11.</span> <span class="nav-text">4. 数据持久化插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-日志插件"><span class="nav-number">2.12.</span> <span class="nav-text">5. 日志插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#权限管理"><span class="nav-number">2.13.</span> <span class="nav-text">权限管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-需要实现的功能"><span class="nav-number">2.14.</span> <span class="nav-text">1. 需要实现的功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-路由设计"><span class="nav-number">2.15.</span> <span class="nav-text">2. 路由设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-页面级的权限控制"><span class="nav-number">2.16.</span> <span class="nav-text">3. 页面级的权限控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-元素级的权限控制"><span class="nav-number">2.17.</span> <span class="nav-text">4. 元素级的权限控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#render函数"><span class="nav-number">2.18.</span> <span class="nav-text">render函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-如何封装一个支持render渲染的组件"><span class="nav-number">2.19.</span> <span class="nav-text">1. 如何封装一个支持render渲染的组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#混入"><span class="nav-number">2.20.</span> <span class="nav-text">混入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-小知识-1"><span class="nav-number">2.21.</span> <span class="nav-text">1. 小知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-应用场景"><span class="nav-number">2.22.</span> <span class="nav-text">2. 应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据模拟"><span class="nav-number">2.23.</span> <span class="nav-text">数据模拟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-需要实现的功能-1"><span class="nav-number">2.24.</span> <span class="nav-text">1. 需要实现的功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-配置Mockjs拦截Ajax请求"><span class="nav-number">2.25.</span> <span class="nav-text">2. 配置Mockjs拦截Ajax请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-响应的统一数据格式"><span class="nav-number">2.26.</span> <span class="nav-text">3. 响应的统一数据格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-配置响应逻辑"><span class="nav-number">2.27.</span> <span class="nav-text">4. 配置响应逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-模拟随机数据"><span class="nav-number">2.28.</span> <span class="nav-text">5. 模拟随机数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打包优化"><span class="nav-number">2.29.</span> <span class="nav-text">打包优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-做哪部分的优化"><span class="nav-number">2.30.</span> <span class="nav-text">1. 做哪部分的优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-cdn优化"><span class="nav-number">2.31.</span> <span class="nav-text">2. cdn优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-路由懒加载"><span class="nav-number">2.32.</span> <span class="nav-text">3. 路由懒加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-其他优化"><span class="nav-number">2.33.</span> <span class="nav-text">5. 其他优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-用户体验"><span class="nav-number">2.34.</span> <span class="nav-text">6. 用户体验</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jianhui Chen</span>
+</div>
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数：<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+-->
+
+<!--
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+<div class="theme-info">
+  <span class="post-count">博客全站共21.4k字</span>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: 'bd0cbb30da9c24da8c7c',
+          clientSecret: 'bd64a8e8c8117d5f3e22291cd3f29f2c70e671ff',
+          repo: 'blog',
+          owner: 'calebman',
+          admin: ['calebman'],
+          id: location.pathname,
+          labels: 'gittalk'.split(',').filter(l => l),
+          perPage: 15,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        })
+
+        gitalk.render('gitalk-container')           
+       </script>
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+<!-- 页面点击小红心 -->
+<!-- <script type="text/javascript" src="/js/src/love.js"></script> -->
+<!-- 富强 -->
+<script type="text/javascript" src="/js/src/china.js"></script>
+</html>
